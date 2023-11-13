@@ -39,7 +39,6 @@ export class AddCustomerComponent {
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.windowWidth = window.innerWidth;
-    console.log(this.windowWidth);
   }
 
   constructor() {
