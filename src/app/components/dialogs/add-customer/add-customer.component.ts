@@ -76,4 +76,39 @@ export class AddCustomerComponent {
     return true;
   }
 
+
+  async makeGanzViel() {
+    await this.createDummyCustomers();
+  }
+
+
+  async createDummyCustomers() {
+    let promises: any[] = [];
+
+    for (let i = 0; i < 50; i++) {
+      let customer: any = {
+        id: 0,
+        vorname: 'Max' + i,
+        nachname: 'Mustermann' + i,
+        unternehmen: 'Mustermann GmbH' + i,
+        email: 'MaxMustermann' + i + '@mail.de',
+        telefon: '0123456789',
+        strasse: 'Musterstraße ' + i,
+        plz: 12345,
+        ort: 'Musterstadt' + i,
+        anmerkungen: 'Musteranmerkung',
+      }
+
+      let length = this.fs.customers.getValue()?.length;
+      length ? customer.id = length + 1 : customer.id = 1;
+
+      promises.push(await this.fs.createCustomer(customer))
+    }
+
+    Promise.all(promises).then(() => {
+      console.log("All customers created");
+      this.dialogRef.close();
+    });
+  }
+
 }
