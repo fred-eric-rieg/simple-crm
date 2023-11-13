@@ -19,6 +19,7 @@ import { KundenComponent } from './components/sub/kunden/kunden.component';
 import { AuftraegeComponent } from './components/sub/auftraege/auftraege.component';
 
 import { environment } from 'src/environments/environment.development'; // Currently using development environment
+console.log('%cThis is the development environment.', 'color: orange; font-size: 18px; font-weight: bold;');
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
