@@ -6,3 +6,34 @@
     text-overflow: ellipsis;
     overflow-y: scroll;
 }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+    padding: 5px;
+    text-align: left;
+}
+
+th {
+    background-color: #3f51b5;
+    color: white;
+}
+
+tr {
+    transition: all 125ms ease-in-out;
+    background-color: white;
+}
+
+.hover-row {
+    cursor: pointer;
+}
+
+.hover-row:hover {
+    transition: all 125ms ease-in-out;
+    background-color: #9299be;
+    color: white;
+}

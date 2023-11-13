@@ -1,11 +1,12 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { FirebaseService } from 'src/app/shared/services/firebase.service';
 
 @Component({
   selector: 'app-mainpage',
   templateUrl: './mainpage.component.html',
   styleUrls: ['./mainpage.component.scss']
 })
-export class MainpageComponent {
+export class MainpageComponent implements OnInit {
 
   windowWidth: number = 0;
 
@@ -14,8 +15,12 @@ export class MainpageComponent {
     this.windowWidth = window.innerWidth;
   }
 
-  constructor() {
+  constructor(private fs: FirebaseService) {
     this.windowWidth = window.innerWidth;
+  }
+
+  ngOnInit() {
+    this.fs.getAllCustomers();
   }
 
 }
