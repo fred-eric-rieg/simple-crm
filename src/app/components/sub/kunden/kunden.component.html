@@ -1,6 +1,9 @@
 <section class="main-box">
     <h1>Kunden</h1>
 
+    <p><button mat-fab color="primary" (click)="openDialog()"><mat-icon>add</mat-icon></button></p>
+    
+
     <p *ngIf="fs.customers == null">No customers yet...</p>
 
     <!-- a simple table -->

@@ -7,17 +7,19 @@ import { FirebaseService } from 'src/app/shared/services/firebase.service';
   styleUrls: ['./mainpage.component.scss']
 })
 export class MainpageComponent implements OnInit {
-
   windowWidth: number = 0;
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.windowWidth = window.innerWidth;
+    console.log(this.windowWidth);
   }
 
-  constructor(private fs: FirebaseService) {
-    this.windowWidth = window.innerWidth;
-  }
+  constructor(
+    private fs: FirebaseService
+    ) {
+      this.windowWidth = window.innerWidth;
+    }
 
   ngOnInit() {
     this.fs.getAllCustomers();

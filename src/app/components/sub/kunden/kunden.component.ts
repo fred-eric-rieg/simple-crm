@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FirebaseService } from 'src/app/shared/services/firebase.service';
+import { AddCustomerComponent } from '../../dialogs/add-customer/add-customer.component';
+import { MatDialog } from '@angular/material/dialog';
 
 interface Customer {
   id: number;
@@ -24,12 +26,24 @@ interface Customer {
 })
 export class KundenComponent {
 
-  constructor(public fs: FirebaseService) { }
+  constructor(
+    public fs: FirebaseService,
+    private dialog: MatDialog) { }
 
 
   formatDate(timestamp: any) {
     const date = timestamp.toDate();
     return date.toLocaleDateString('de-DE');
+  }
+
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AddCustomerComponent, {
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
 }

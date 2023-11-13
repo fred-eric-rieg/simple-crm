@@ -23,12 +23,9 @@ th {
     color: white;
 }
 
-tr {
+.hover-row {
     transition: all 125ms ease-in-out;
     background-color: white;
-}
-
-.hover-row {
     cursor: pointer;
 }
 
