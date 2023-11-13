@@ -17,6 +17,8 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { DashboardComponent } from './components/sub/dashboard/dashboard.component';
 import { KundenComponent } from './components/sub/kunden/kunden.component';
 import { AuftraegeComponent } from './components/sub/auftraege/auftraege.component';
+
+import { environment } from 'src/environments/environment.development';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
@@ -42,7 +44,7 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
     MatIconModule,
     MatButtonModule,
     MatToolbarModule,
-    provideFirebaseApp(() => initializeApp({"projectId":"simple-crm-a3a5e","appId":"1:820482635186:web:d7baa23e92801e306fe0ab","storageBucket":"simple-crm-a3a5e.appspot.com","apiKey":"AIzaSyBMvuavzV8ozTEL7o47yVTNApadK6ZzIaE","authDomain":"simple-crm-a3a5e.firebaseapp.com","messagingSenderId":"820482635186"})),
+    provideFirebaseApp(() => initializeApp( environment.firebase )),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage())
