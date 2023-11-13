@@ -2,14 +2,14 @@
     <h1>Kunden</h1>
 
     <p><button mat-fab color="primary" (click)="openDialog()"><mat-icon>add</mat-icon></button></p>
-    
+
 
     <p *ngIf="fs.customers == null">No customers yet...</p>
 
     <!-- a simple table -->
-    <table>
+    <table *ngIf="sortLowFirst">
         <tr>
-            <th>id</th>
+            <th (click)="sortLowFirst = false" class="sort">id <mat-icon>arrow_upward</mat-icon></th>
             <th>vorname</th>
             <th>nachname</th>
             <th>unternehmen</th>
@@ -22,7 +22,7 @@
             <th>geändert</th>
         </tr>
 
-        <tr *ngFor="let customer of fs.customers | async" class="hover-row">
+        <tr *ngFor="let customer of fs.customers | async | sortId:'aufsteigend' " class="hover-row">
             <td>{{ customer.id }}</td>
             <td>{{ customer.vorname }}</td>
             <td>{{ customer.nachname }}</td>
@@ -35,7 +35,37 @@
             <td>{{ formatDate(customer.erstellt) }}</td>
             <td>{{ formatDate(customer.geaendert) }}</td>
         </tr>
-
     </table>
+
+    <table *ngIf="!sortLowFirst">
+        <tr>
+            <th (click)="sortLowFirst = true" class="sort">id  <mat-icon>arrow_downward</mat-icon></th>
+            <th>vorname</th>
+            <th>nachname</th>
+            <th>unternehmen</th>
+            <th>ort</th>
+            <th>strasse</th>
+            <th>plz</th>
+            <th>email</th>
+            <th>telefon</th>
+            <th>erstellt</th>
+            <th>geändert</th>
+        </tr>
+
+        <tr *ngFor="let customer of fs.customers | async | sortId:'absteigend' " class="hover-row">
+            <td>{{ customer.id }}</td>
+            <td>{{ customer.vorname }}</td>
+            <td>{{ customer.nachname }}</td>
+            <td>{{ customer.unternehmen }}</td>
+            <td>{{ customer.ort }}</td>
+            <td>{{ customer.strasse }}</td>
+            <td>{{ customer.plz }}</td>
+            <td>{{ customer.email }}</td>
+            <td>{{ customer.telefon }}</td>
+            <td>{{ formatDate(customer.erstellt) }}</td>
+            <td>{{ formatDate(customer.geaendert) }}</td>
+        </tr>
+    </table>
+
 
 </section>

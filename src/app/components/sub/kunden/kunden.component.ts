@@ -25,6 +25,8 @@ interface Customer {
 })
 export class KundenComponent {
 
+  sortLowFirst: boolean = true;
+
   constructor(
     public fs: FirebaseService,
     private dialog: MatDialog) { }
