@@ -1,0 +1,24 @@
+.container {
+    width: fit-content;
+    height: 100%;
+}
+
+.sidenav {
+    width: 250px;
+    padding-left: 20px;
+    padding-top: 20px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+@media screen and (max-width: 600px) {
+    .container {
+        height: calc(100% - 56px);
+    }
+    
+}

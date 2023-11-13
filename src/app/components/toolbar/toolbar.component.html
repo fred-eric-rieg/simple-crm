@@ -1,0 +1,8 @@
+<mat-toolbar color="primary" class="example-toolbar">
+    <button mat-icon-button (click)="toggleSidenav()">
+        <mat-icon [class.hide]="snavservice.toggled">chevron_right</mat-icon>
+        <mat-icon [class.hide]="!snavservice.toggled">chevron_left</mat-icon>
+
+    </button>
+    <h1>Simple CRM</h1>
+</mat-toolbar>

@@ -1,0 +1,27 @@
+.flexing {
+    display: flex;
+    width: 100%;
+    max-width: 100%;
+    height: calc(100% - 64px);
+    overflow-x: hidden;
+}
+
+.absolute-box {
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+@media screen and (max-width: 600px) {
+    .flexing {
+        height: calc(100% - 56px);
+    }
+
+    .absolute-box {
+        top: 56px;
+    }
+    
+}

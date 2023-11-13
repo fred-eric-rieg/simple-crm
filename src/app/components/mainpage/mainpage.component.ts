@@ -1,13 +1,21 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-mainpage',
-  standalone: true,
-  imports: [CommonModule],
   templateUrl: './mainpage.component.html',
   styleUrl: './mainpage.component.scss'
 })
 export class MainpageComponent {
+
+  windowWidth: number = 0;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.windowWidth = window.innerWidth;
+  }
+
+  constructor() {
+    this.windowWidth = window.innerWidth;
+  }
 
 }
