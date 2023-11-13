@@ -13,7 +13,6 @@ interface Customer {
   strasse: string;
   plz: number;
   ort: string;
-  land: string;
   anmerkungen: string;
   erstellt: Date;
   geaendert: Date;
@@ -40,10 +39,8 @@ export class KundenComponent {
   openDialog(): void {
     const dialogRef = this.dialog.open(AddCustomerComponent, {
     });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+    const sub = dialogRef.afterClosed().subscribe(result => {});
+    sub.unsubscribe();
   }
 
 }

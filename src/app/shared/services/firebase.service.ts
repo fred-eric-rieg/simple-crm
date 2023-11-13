@@ -1,5 +1,5 @@
 import { Injectable, OnDestroy, inject } from '@angular/core';
-import { Firestore, onSnapshot, getFirestore, doc, collection, query } from '@angular/fire/firestore';
+import { Firestore, onSnapshot, getFirestore, collection, query, Timestamp, addDoc } from '@angular/fire/firestore';
 import { BehaviorSubject } from 'rxjs';
 
 
@@ -13,7 +13,6 @@ interface Customer {
   strasse: string;
   plz: number;
   ort: string;
-  land: string;
   anmerkungen: string;
   erstellt: Date;
   geaendert: Date;
@@ -32,19 +31,48 @@ export class FirebaseService implements OnDestroy {
   ngOnDestroy(): void {
   }
 
-
-  getAllCustomers() {
+  /**
+   * Get all customers from the database as snapshot with listener,
+   * that listens for changes in the database.
+   */
+  async getAllCustomers() {
     const db = getFirestore();
     const q = query(collection(db, 'kunden'));
 
-    const customers: Customer[] = [];
+    let customers: Customer[] = [];
 
     const unsub = onSnapshot(q, (querySnapshot) => {
+
+      customers.length = 0; // Clear array to prevent duplicates.
+
       querySnapshot.forEach((doc) => {
+        console.log(doc.data());
         customers.push(doc.data() as Customer);
       });
     });
 
     this.customers.next(customers);
   }
+
+
+  async createCustomer(customer: any) {
+    const db = getFirestore();
+    const collectionRef = collection(db, 'kunden');
+    await addDoc(collectionRef, {
+      id: customer.id,
+      vorname: customer.vorname,
+      nachname: customer.nachname,
+      unternehmen: customer.unternehmen,
+      email: customer.email,
+      telefon: customer.telefon,
+      strasse: customer.strasse,
+      plz: customer.plz,
+      ort: customer.ort,
+      anmerkungen: customer.anmerkungen,
+      erstellt: Timestamp.fromDate(new Date()),
+      geaendert: Timestamp.fromDate(new Date())
+    });
+    return true;
+  }
+
 }

@@ -29,6 +29,7 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
 
 // Currently using development environment
 import { environment } from 'src/environments/environment.development';
+import { SortIdPipe } from './shared/pipes/sort-id.pipe';
 console.log('%cThis is the development environment.', 'color: orange; font-size: 18px; font-weight: bold;');
 
 
@@ -41,7 +42,8 @@ console.log('%cThis is the development environment.', 'color: orange; font-size:
     DashboardComponent,
     KundenComponent,
     AuftraegeComponent,
-    AddCustomerComponent
+    AddCustomerComponent,
+    SortIdPipe
   ],
   imports: [
     BrowserModule,
