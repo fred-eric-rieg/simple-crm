@@ -4,7 +4,7 @@ import { SidenavService } from 'src/app/shared/services/sidenav.service';
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
-  styleUrl: './toolbar.component.scss'
+  styleUrls: ['./toolbar.component.scss']
 })
 export class ToolbarComponent {
 

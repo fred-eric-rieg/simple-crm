@@ -5,7 +5,7 @@ import { SidenavService } from 'src/app/shared/services/sidenav.service';
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
-  styleUrl: './sidenav.component.scss'
+  styleUrls: ['./sidenav.component.scss']
 })
 export class SidenavComponent implements OnDestroy, OnInit {
 

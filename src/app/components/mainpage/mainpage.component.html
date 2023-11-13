@@ -1,16 +1,15 @@
 <app-toolbar></app-toolbar>
 
-@if (windowWidth >= 600) {
 <!-- If Sidenav is expanded then it squeezes the router-outlet -->
-<div class="flexing">
+<div class="flexing" *ngIf="windowWidth >= 600">
     <app-sidenav></app-sidenav>
     <router-outlet></router-outlet>
 </div>
-} @else {
-<!-- If Sidenav is expanded then it overlaps the router-outlet -->
-<app-sidenav></app-sidenav>
-<div class="absolute-box">
-    <router-outlet></router-outlet>
-</div>
 
-}
+<!-- If Sidenav is expanded then it overlaps the router-outlet -->
+<div *ngIf="windowWidth < 600">
+    <app-sidenav></app-sidenav>
+    <div class="absolute-box">
+        <router-outlet></router-outlet>
+    </div>
+</div>

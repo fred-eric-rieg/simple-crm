@@ -69,7 +69,7 @@
               "buildTarget": "simple_crm:build:production"
             },
             "development": {
-              "buildTarget": "simple_crm:build:development"
+              "browserTarget": "simple_crm:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -77,7 +77,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "simple_crm:build"
+            "browserTarget": "simple_crm:build"
           }
         },
         "test": {
