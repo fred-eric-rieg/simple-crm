@@ -1,28 +1,29 @@
 .main-box {
-    box-sizing: border-box;
-    padding: 20px;
-    height: 100%;
-    width: 100%;
-    text-overflow: ellipsis;
-    overflow-y: scroll;
-  }
-  
-  table {
-    width: 100%;
-  }
-  
-  .mat-mdc-form-field {
-    font-size: 14px;
-    width: 100%;
-  }
-  
-  td,
-  th {
-    width: 25%;
-  }
-  
-  .flex-row {
-    display: flex;
-    flex-direction: row;
-    gap: 2rem;
-  }
+  box-sizing: border-box;
+  padding: 20px;
+  height: 100%;
+  width: 100%;
+  text-overflow: ellipsis;
+  overflow-y: scroll;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td,
+th {
+  width: 25%;
+  cursor: pointer;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}
