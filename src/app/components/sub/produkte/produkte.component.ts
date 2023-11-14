@@ -6,32 +6,31 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { Timestamp } from '@angular/fire/firestore';
-import { AddTaskComponent } from '../../dialogs/add-task/add-task.component';
+import { AddProductComponent } from '../../dialogs/add-product/add-product.component';
 
-interface Task {
+
+interface Produkt {
   id: number;
   fid: string;
-  unternehmen: string;
-  anmerkungen: string;
+  name: string;
+  beschreibung: string;
+  preis: number;
   erstellt: Timestamp;
   geaendert: Timestamp;
-  deadline: Timestamp;
-  wert: number;
-  posten: string[];
 }
 
 @Component({
-  selector: 'app-auftraege',
-  templateUrl: './auftraege.component.html',
-  styleUrls: ['./auftraege.component.scss']
+  selector: 'app-produkte',
+  templateUrl: './produkte.component.html',
+  styleUrls: ['./produkte.component.scss']
 })
-export class AuftraegeComponent implements AfterViewInit {
+export class ProdukteComponent implements AfterViewInit {
 
   searchTerm: string = '';
 
-  displayedColumns: string[] = ['id', 'erstellt', 'unternehmen', 'anmerkungen', 'deadline', 'wert', 'posten'];
+  displayedColumns: string[] = ['id', 'name', 'beschreibung', 'preis'];
 
-  dataSource = new MatTableDataSource<Task>;
+  dataSource = new MatTableDataSource<Produkt>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -41,7 +40,7 @@ export class AuftraegeComponent implements AfterViewInit {
     private dialog: MatDialog,
     private router: Router,
     private ef: ElementRef) {
-    this.fs.tasks.subscribe(data => {
+    this.fs.products.subscribe(data => {
       if (data) {
         this.dataSource.data = data;
         setTimeout(() => {
@@ -58,7 +57,7 @@ export class AuftraegeComponent implements AfterViewInit {
 
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(AddTaskComponent, {
+    const dialogRef = this.dialog.open(AddProductComponent, {
       height: 'fit-content',
     });
     const sub = dialogRef.afterClosed().subscribe(result => {
@@ -96,11 +95,11 @@ export class AuftraegeComponent implements AfterViewInit {
   }
 
 
-  formatCustomer(customer: string) {
+  formatCustomer(product: string) {
     let name = "";
-    this.fs.customers.getValue()?.forEach(c => {
-      if (c.fid === customer) {
-        name = c.unternehmen;
+    this.fs.products.getValue()?.forEach(p => {
+      if (p.fid === product) {
+        name = p.name;
       }
     });
     return name;
@@ -108,6 +107,6 @@ export class AuftraegeComponent implements AfterViewInit {
 
 
   selectTask(fid: string) {
-    this.router.navigate(['auftraege/', fid]);
+    this.router.navigate(['produkte/', fid]);
   }
 }

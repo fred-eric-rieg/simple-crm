@@ -1,0 +1,40 @@
+<section class="main-box">
+    <div class="flex-row">
+        <h1>Detailansicht Auftrag</h1> <button mat-raised-button [routerLink]="['/auftraege']"><mat-icon>keyboard_backspace</mat-icon>back</button>
+    </div>
+    
+
+    <mat-card *ngFor="let task of fs.tasks | async" class="padding">
+
+        <div class="flex-column">
+            <h2># {{task.id}}</h2>
+            <span class="subtitle">{{formatCustomer(task.unternehmen)}}</span>
+        </div>
+
+        <div class="flex-row">
+            <div class="flex-column">
+                <span class="subtitle">Details </span>
+                <span *ngFor="let posten of task.posten; index as i">Posten {{i}}: {{posten}}</span>
+                <span>Gesamtwert: {{task.wert}} €</span>
+                <p>Deadline: {{formatDate(task.deadline) | date: 'medium'}}</p>
+            </div>
+        </div>
+
+        <div class="flex-row">
+            <div class="flex-column">
+                <span class="subtitle">Anmerkungen</span>
+                <p>{{task.anmerkungen}}</p>
+                <span>Erstellt: {{formatDate(task.erstellt) | date: 'medium'}}</span>
+                <p>Geändert: {{formatDate(task.geaendert) | date: 'medium'}}</p>
+            </div>
+        </div>
+
+        <div class="flex-row">
+            <div class="flex-column">
+                <button mat-raised-button color="primary"
+                    (click)="openDialog(task)"><mat-icon>edit</mat-icon>Bearbeiten</button>
+            </div>
+        </div>
+    </mat-card>
+
+</section>

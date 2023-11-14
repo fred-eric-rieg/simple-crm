@@ -1,0 +1,38 @@
+<section class="main-box">
+    <div class="flex-row">
+        <h1>Detailansicht Produkt</h1> <button mat-raised-button [routerLink]="['/produkte']"><mat-icon>keyboard_backspace</mat-icon>back</button>
+    </div>
+    
+
+    <mat-card *ngFor="let product of fs.products | async" class="padding">
+
+        <div class="flex-column">
+            <h2># {{product.id}}</h2>
+            <span class="subtitle">{{product.name}}</span>
+        </div>
+
+        <div class="flex-row">
+            <div class="flex-column">
+                <span class="subtitle">Details </span>
+                <span>Stückpreis Netto: {{product.preis}} €</span>
+                <p>Beschreibung: {{product.beschreibung}}</p>
+            </div>
+        </div>
+
+        <div class="flex-row">
+            <div class="flex-column">
+                <span class="subtitle">Meta</span>
+                <span>Erstellt: {{formatDate(product.erstellt) | date: 'medium'}}</span>
+                <p>Geändert: {{formatDate(product.geaendert) | date: 'medium'}}</p>
+            </div>
+        </div>
+
+        <div class="flex-row">
+            <div class="flex-column">
+                <button mat-raised-button color="primary"
+                    (click)="openDialog(product)"><mat-icon>edit</mat-icon>Bearbeiten</button>
+            </div>
+        </div>
+    </mat-card>
+
+</section>

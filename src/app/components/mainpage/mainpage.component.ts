@@ -22,6 +22,8 @@ export class MainpageComponent implements OnInit {
 
   ngOnInit() {
     this.fs.getAllCustomers();
+    this.fs.getAllTasks();
+    this.fs.getAllProducts();
   }
 
 }

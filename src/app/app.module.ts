@@ -17,6 +17,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCardModule } from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
 
 import { MainpageComponent } from './components/mainpage/mainpage.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
@@ -24,7 +25,7 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { DashboardComponent } from './components/sub/dashboard/dashboard.component';
 import { KundenComponent } from './components/sub/kunden/kunden.component';
 import { AuftraegeComponent } from './components/sub/auftraege/auftraege.component';
-import { AddCustomerComponent } from './components/dialogs/add-customer/add-customer.component'; 
+import { AddCustomerComponent } from './components/dialogs/add-customer/add-customer.component';
 
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
@@ -36,6 +37,13 @@ import { environment } from 'src/environments/environment.development';
 import { KundenDetailsComponent } from './components/sub/kunden-details/kunden-details.component';
 import { FilterIdPipe } from './shared/pipes/filter-id.pipe';
 import { EditCustomerComponent } from './components/dialogs/edit-customer/edit-customer.component';
+import { AddTaskComponent } from './components/dialogs/add-task/add-task.component';
+import { AuftraegeDetailsComponent } from './components/sub/auftraege-details/auftraege-details.component';
+import { EditTaskComponent } from './components/dialogs/edit-task/edit-task.component';
+import { ProdukteComponent } from './components/sub/produkte/produkte.component';
+import { AddProductComponent } from './components/dialogs/add-product/add-product.component';
+import { ProdukteDetailsComponent } from './components/sub/produkte-details/produkte-details.component';
+import { EditProductComponent } from './components/dialogs/edit-product/edit-product.component';
 console.log('%cThis is the development environment.', 'color: orange; font-size: 18px; font-weight: bold;');
 
 
@@ -52,6 +60,13 @@ console.log('%cThis is the development environment.', 'color: orange; font-size:
     KundenDetailsComponent,
     FilterIdPipe,
     EditCustomerComponent,
+    AddTaskComponent,
+    AuftraegeDetailsComponent,
+    EditTaskComponent,
+    ProdukteComponent,
+    AddProductComponent,
+    ProdukteDetailsComponent,
+    EditProductComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,6 +84,7 @@ console.log('%cThis is the development environment.', 'color: orange; font-size:
     MatTableModule,
     MatPaginatorModule,
     MatCardModule,
+    MatSelectModule,
     FormsModule,
 
     provideFirebaseApp(() => initializeApp(environment.firebase)),

@@ -1,4 +1,5 @@
 import { Component, HostListener } from '@angular/core';
+import { Timestamp } from '@angular/fire/firestore';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FirebaseService } from 'src/app/shared/services/firebase.service';
 
@@ -13,8 +14,8 @@ interface Customer {
   plz: number;
   ort: string;
   anmerkungen: string;
-  erstellt: Date;
-  geaendert: Date;
+  erstellt: Timestamp;
+  geaendert: Timestamp;
 }
 
 @Component({

@@ -19,49 +19,49 @@
             <!-- Vorname Column -->
             <ng-container matColumnDef="vorname">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Vorname </th>
-                <td mat-cell *matCellDef="let row"> {{row.vorname}} </td>
+                <td mat-cell *matCellDef="let row" (click)="selectCustomer(row.fid)"> {{row.vorname}} </td>
             </ng-container>
 
             <!-- Nachname Column -->
             <ng-container matColumnDef="nachname">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Nachname </th>
-                <td mat-cell *matCellDef="let row"> {{row.nachname}} </td>
+                <td mat-cell *matCellDef="let row" (click)="selectCustomer(row.fid)"> {{row.nachname}} </td>
             </ng-container>
 
             <!-- Unternehmen Column -->
             <ng-container matColumnDef="unternehmen">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Unternehmen </th>
-                <td mat-cell *matCellDef="let row"> {{row.unternehmen}} </td>
+                <td mat-cell *matCellDef="let row" (click)="selectCustomer(row.fid)"> {{row.unternehmen}} </td>
             </ng-container>
 
             <!-- Unternehmen Column -->
             <ng-container matColumnDef="strasse">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Strasse </th>
-                <td mat-cell *matCellDef="let row"> {{row.strasse}} </td>
+                <td mat-cell *matCellDef="let row" (click)="selectCustomer(row.fid)"> {{row.strasse}} </td>
             </ng-container>
 
             <!-- Unternehmen Column -->
             <ng-container matColumnDef="plz">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> PLZ </th>
-                <td mat-cell *matCellDef="let row"> {{row.plz}} </td>
+                <td mat-cell *matCellDef="let row" (click)="selectCustomer(row.fid)"> {{row.plz}} </td>
             </ng-container>
 
             <!-- Unternehmen Column -->
             <ng-container matColumnDef="ort">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Ort </th>
-                <td mat-cell *matCellDef="let row"> {{row.ort}} </td>
+                <td mat-cell *matCellDef="let row" (click)="selectCustomer(row.fid)"> {{row.ort}} </td>
             </ng-container>
 
             <!-- Email Column -->
             <ng-container matColumnDef="email">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
-                <td mat-cell *matCellDef="let row"> {{row.email}} </td>
+                <td mat-cell *matCellDef="let row" (click)="selectCustomer(row.fid)"> {{row.email}} </td>
             </ng-container>
 
             <!-- Telefon Column -->
             <ng-container matColumnDef="telefon">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Telefon </th>
-                <td mat-cell *matCellDef="let row"> {{row.telefon}} </td>
+                <td mat-cell *matCellDef="let row" (click)="selectCustomer(row.fid)"> {{row.telefon}} </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

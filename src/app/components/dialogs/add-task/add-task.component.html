@@ -1,0 +1,35 @@
+<h1 mat-dialog-title>Neuer Auftrag</h1>
+<div mat-dialog-content>
+
+    <p>Pflichtfelder: </p>
+
+    <div class="flex-column">
+        <mat-form-field>
+            <mat-label>Rechnungsnummer</mat-label>
+            <input matInput [(ngModel)]="id" required="">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Kunde</mat-label>
+            <mat-select required="" [(value)]="unternehmen">
+                <mat-option *ngFor="let kunde of fs.customers | async" [value]="kunde.fid">
+                    {{kunde.unternehmen}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <p>You selected: {{unternehmen}}</p>
+
+        <mat-form-field>
+            <mat-label>Anmerkungen</mat-label>
+            <input matInput [(ngModel)]="anmerkungen" required="">
+        </mat-form-field>
+
+    </div>
+
+
+</div>
+<div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button (click)="createTask()" cdkFocusInitial>Ok</button>
+</div>
