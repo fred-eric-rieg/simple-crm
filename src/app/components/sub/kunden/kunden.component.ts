@@ -1,13 +1,16 @@
-import { AfterViewInit, Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { FirebaseService } from 'src/app/shared/services/firebase.service';
 import { AddCustomerComponent } from '../../dialogs/add-customer/add-customer.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { Router } from '@angular/router';
+import { Timestamp } from '@angular/fire/firestore';
 
 interface Customer {
   id: number;
+  fid: string;
   vorname: string;
   nachname: string;
   unternehmen: string;
@@ -17,8 +20,8 @@ interface Customer {
   plz: number;
   ort: string;
   anmerkungen: string;
-  erstellt: Date;
-  geaendert: Date;
+  erstellt: Timestamp;
+  geaendert: Timestamp;
 }
 
 @Component({
@@ -40,7 +43,7 @@ export class KundenComponent implements AfterViewInit {
   constructor(
     public fs: FirebaseService,
     private dialog: MatDialog,
-    private renderer: Renderer2,
+    private router: Router,
     private ef: ElementRef) {
     this.fs.customers.subscribe(data => {
       if (data) {
@@ -48,9 +51,6 @@ export class KundenComponent implements AfterViewInit {
         setTimeout(() => {
           this.pressEnter();
         }, 1000);
-      } else {
-        let customer: Customer = { id: 1, vorname: 'No customer found', nachname: '', unternehmen: '', email: '', telefon: '', strasse: '', plz: 0, ort: '', anmerkungen: '', erstellt: new Date(), geaendert: new Date() }
-        this.dataSource.data = [customer];
       }
     });
   }
@@ -63,9 +63,11 @@ export class KundenComponent implements AfterViewInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(AddCustomerComponent, {
+      height: 'fit-content',
     });
-    const sub = dialogRef.afterClosed().subscribe(result => { });
-    sub.unsubscribe();
+    const sub = dialogRef.afterClosed().subscribe(result => {
+      this.pressEnter();
+    });
   }
 
 
@@ -90,5 +92,10 @@ export class KundenComponent implements AfterViewInit {
 
     const input = this.ef.nativeElement.querySelector('input');
     input.dispatchEvent(event);
+  }
+
+
+  selectCustomer(fid: string) {
+    this.router.navigate(['kunden/', fid]);
   }
 }

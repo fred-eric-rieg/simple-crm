@@ -16,6 +16,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatCardModule } from '@angular/material/card';
 
 import { MainpageComponent } from './components/mainpage/mainpage.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
@@ -32,7 +33,9 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
 
 // Currently using development environment
 import { environment } from 'src/environments/environment.development';
-import { SortIdPipe } from './shared/pipes/sort-id.pipe';
+import { KundenDetailsComponent } from './components/sub/kunden-details/kunden-details.component';
+import { FilterIdPipe } from './shared/pipes/filter-id.pipe';
+import { EditCustomerComponent } from './components/dialogs/edit-customer/edit-customer.component';
 console.log('%cThis is the development environment.', 'color: orange; font-size: 18px; font-weight: bold;');
 
 
@@ -46,7 +49,9 @@ console.log('%cThis is the development environment.', 'color: orange; font-size:
     KundenComponent,
     AuftraegeComponent,
     AddCustomerComponent,
-    SortIdPipe,
+    KundenDetailsComponent,
+    FilterIdPipe,
+    EditCustomerComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,6 +68,7 @@ console.log('%cThis is the development environment.', 'color: orange; font-size:
     MatSortModule,
     MatTableModule,
     MatPaginatorModule,
+    MatCardModule,
     FormsModule,
 
     provideFirebaseApp(() => initializeApp(environment.firebase)),

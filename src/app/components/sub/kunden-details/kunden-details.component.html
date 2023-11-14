@@ -1,0 +1,41 @@
+<section class="main-box">
+    <div class="flex-row">
+        <h1>Detailansicht Kunde</h1> <button mat-raised-button [routerLink]="['/kunden']"><mat-icon>keyboard_backspace</mat-icon>back</button>
+    </div>
+    
+
+    <mat-card *ngFor="let kunde of fs.customers | async | filterId: customer" class="padding">
+
+        <div class="flex-column">
+            <h2>{{kunde.vorname}} {{kunde.nachname}}</h2>
+            <span class="subtitle">Anschrift</span>
+            <span>{{kunde.unternehmen}}</span>
+            <p>{{kunde.strasse}}, {{kunde.plz}} {{kunde.ort}}</p>
+        </div>
+
+        <div class="flex-row">
+            <div class="flex-column">
+                <span class="subtitle">Kontakt </span>
+                <span>Email: {{kunde.email}}</span>
+                <p>Telefon: {{kunde.telefon}}</p>
+            </div>
+        </div>
+
+        <div class="flex-row">
+            <div class="flex-column">
+                <span class="subtitle">Anmerkungen</span>
+                <p>{{kunde.anmerkungen}}</p>
+                <span>Erstellt: {{formatDate(kunde.erstellt) | date: 'medium'}}</span>
+                <p>Geändert: {{formatDate(kunde.geaendert) | date: 'medium'}}</p>
+            </div>
+        </div>
+
+        <div class="flex-row">
+            <div class="flex-column">
+                <button mat-raised-button color="primary"
+                    (click)="openDialog(kunde)"><mat-icon>edit</mat-icon>Bearbeiten</button>
+            </div>
+        </div>
+    </mat-card>
+
+</section>

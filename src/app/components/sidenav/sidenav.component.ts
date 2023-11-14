@@ -16,10 +16,10 @@ export class SidenavComponent implements OnDestroy, OnInit {
   constructor(
     private snavservice: SidenavService,
     private router: Router,
-    ) {}
+  ) { }
 
   ngOnInit(): void {
-    
+
   }
 
   ngOnDestroy(): void {
@@ -33,11 +33,8 @@ export class SidenavComponent implements OnDestroy, OnInit {
 
   open(url: string) {
     this.router.navigate([url]);
-    // Auto close sidenav on mobile
-    if (window.innerWidth < 600) {
-      this.snav.toggle();
-      this.snavservice.toggled = !this.snavservice.toggled;
-    }
+    this.snav.toggle();
+    this.snavservice.toggled = !this.snavservice.toggled;
   }
 
 }

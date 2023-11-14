@@ -1,5 +1,5 @@
 <section class="main-box">
-    <h1>Kunden</h1>
+    <div class="flex-row"><h1>Kunden</h1> <button mat-raised-button color="primary" (click)="openDialog()"><mat-icon>add</mat-icon>Kunden hinzufügen</button></div>
 
     <mat-form-field>
         <mat-label>Filter</mat-label>
@@ -13,13 +13,13 @@
             <!-- ID Column -->
             <ng-container matColumnDef="id">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-                <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+                <td mat-cell *matCellDef="let row" (click)="selectCustomer(row.fid)"> {{row.id}} </td>
             </ng-container>
 
             <!-- Vorname Column -->
             <ng-container matColumnDef="vorname">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Vorname </th>
-                <td mat-cell *matCellDef="let row"> {{row.vorname}}% </td>
+                <td mat-cell *matCellDef="let row"> {{row.vorname}} </td>
             </ng-container>
 
             <!-- Nachname Column -->
