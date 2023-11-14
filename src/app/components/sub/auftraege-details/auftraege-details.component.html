@@ -14,8 +14,8 @@
         <div class="flex-row">
             <div class="flex-column">
                 <span class="subtitle">Details </span>
-                <span *ngFor="let posten of task.posten; index as i">Posten {{i}}: {{posten}}</span>
-                <span>Gesamtwert: {{task.wert}} €</span>
+                <span *ngFor="let posten of task.posten; index as i">Posten {{i + 1}}: {{formatProduct(posten.produkt)}} x {{posten.anzahl}} = {{getSum(posten)}} €</span>
+                <span>Gesamtwert Netto: {{task.wert}} €</span>
                 <p>Deadline: {{formatDate(task.deadline) | date: 'medium'}}</p>
             </div>
         </div>

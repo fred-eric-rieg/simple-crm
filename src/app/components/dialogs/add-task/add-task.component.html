@@ -18,11 +18,24 @@
             </mat-select>
         </mat-form-field>
 
-        <p>You selected: {{unternehmen}}</p>
+        <mat-form-field>
+            <mat-label>Posten</mat-label>
+            <mat-select required="" multiple="true" (valueChange)="onPostenChange($event)">
+                <mat-option *ngFor="let product of fs.products | async" [value]="product.fid">
+                    {{product.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <div class="flex-column" *ngIf="posten.length > 0">
+            Posten:
+            <div *ngFor="let pos of posten; index as i" class="flex-row"><span>{{getProduct(pos.produkt)}} x </span><input type="number"
+                    placeholder="1" class="mini-input" (change)="updateCounter($event, i)"></div>
+        </div>
 
         <mat-form-field>
             <mat-label>Anmerkungen</mat-label>
-            <input matInput [(ngModel)]="anmerkungen" required="">
+            <input matInput [(ngModel)]="anmerkungen">
         </mat-form-field>
 
     </div>

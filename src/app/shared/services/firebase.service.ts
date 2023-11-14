@@ -30,7 +30,12 @@ interface Task {
   geaendert: Timestamp;
   deadline: Timestamp;
   wert: number;
-  posten: string[];
+  posten: Posten[];
+}
+
+interface Posten {
+  anzahl: number;
+  produkt: string;
 }
 
 interface Produkt {

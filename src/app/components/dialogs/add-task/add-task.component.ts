@@ -12,7 +12,12 @@ interface Task {
   geaendert: Timestamp;
   deadline: Timestamp;
   wert: number;
-  posten: string[];
+  posten: Posten[];
+}
+
+interface Posten {
+  anzahl: number;
+  produkt: string;
 }
 
 @Component({
@@ -24,6 +29,7 @@ export class AddTaskComponent {
   windowWidth: number = 0;
 
   id: number = 0;
+  posten: Posten[] = [];
   unternehmen: string = '';
   anmerkungen: string = '';
 
@@ -37,6 +43,8 @@ export class AddTaskComponent {
     public fs: FirebaseService,
   ) {
     this.windowWidth = window.innerWidth;
+    let length = this.fs.tasks.getValue()?.length;
+    length ? this.id = length + 1 : this.id = 1;
   }
 
 
@@ -45,16 +53,17 @@ export class AddTaskComponent {
       let task: any = {
         id: 0,
         fid: '',
+        posten: this.posten,
         unternehmen: this.unternehmen,
         anmerkungen: this.anmerkungen,
         erstellt: Timestamp.now(),
         geaendert: Timestamp.now()
-      } 
+      }
       let length = this.fs.tasks.getValue()?.length;
       length ? task.id = length + 1 : task.id = 1;
       let res = await this.fs.createTask(task);
       if (res) {
-        console.log("Customer created");
+        console.log("Task created");
         this.dialogRef.close();
       } else {
         console.log("Your mom again");
@@ -68,7 +77,35 @@ export class AddTaskComponent {
   isStatusGreen() {
     if (this.id === null) return false;
     if (this.unternehmen === '') return false;
-    if (this.anmerkungen === '') return false;
+    if (this.posten.length === 0) return false;
     return true;
+  }
+
+
+  getProduct(product: string) {
+    let name: string = '';
+    this.fs.products.getValue()?.forEach((p: any) => {
+      if (p.fid == product) {
+        name = p.name;
+      }
+    });
+    return name;
+  }
+
+
+  onPostenChange(event: any) {
+    this.posten.length = 0;
+    event.forEach((e: any) => {
+      let posten: Posten = {
+        anzahl: 1,
+        produkt: e
+      }
+      this.posten.push(posten);
+    });
+  }
+
+
+  updateCounter(event: any, index: number) {
+    this.posten[index].anzahl = event.target.valueAsNumber;
   }
 }

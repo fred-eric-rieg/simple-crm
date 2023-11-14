@@ -12,7 +12,12 @@ interface Task {
   geaendert: Timestamp;
   deadline: Timestamp;
   wert: number;
-  posten: string[];
+  posten: Posten[];
+}
+
+interface Posten {
+  anzahl: number;
+  produkt: string;
 }
 
 @Component({
@@ -23,9 +28,10 @@ interface Task {
 export class EditTaskComponent {
   windowWidth: number = 0;
 
-  id: number = 0;
-  unternehmen: string = '';
-  anmerkungen: string = '';
+  id: number = this.data.id;
+  unternehmen: string = this.data.unternehmen;
+  anmerkungen: string = this.data.anmerkungen;
+  posten: Posten[] = this.data.posten;
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
@@ -37,7 +43,6 @@ export class EditTaskComponent {
     public fs: FirebaseService,
     @Inject(MAT_DIALOG_DATA) public data: Task
   ) {
-    
     this.windowWidth = window.innerWidth;
   }
 
@@ -51,7 +56,7 @@ export class EditTaskComponent {
       }
       let res = await this.fs.updateTask(task);
       if (res) {
-        console.log("Customer created");
+        console.log("Task updated");
         this.dialogRef.close();
       } else {
         console.log("Your mom again");
@@ -68,4 +73,51 @@ export class EditTaskComponent {
     if (this.anmerkungen === '') return false;
     return true;
   }
+
+  /**
+   * Finds the name of the product by its id.
+   * @param product as string
+   * @returns string
+   */
+  getProduct(product: string) {
+    let name: string = '';
+    this.fs.products.getValue()?.forEach((p: any) => {
+      if (p.fid == product) {
+        name = p.name;
+      }
+    });
+    return name;
+  }
+
+  /**
+   * Listens to the event emitted by the product selector.
+   * @param event any
+   */
+  onPostenChange(event: any) {
+    this.posten.length = 0;
+    event.forEach((e: any) => {
+      let posten: Posten = {
+        anzahl: 1,
+        produkt: e
+      }
+      this.posten.push(posten);
+    });
+  }
+
+
+  updateCounter(event: any, index: number) {
+    this.posten[index].anzahl = event.target.valueAsNumber;
+  }
+
+  /**
+   * Extracts the product ids from the posten array.
+   * @returns Array of product ids
+   */
+  getProductIds() {
+    return this.data.posten.map((p: any) => {
+      return p.produkt;
+    });
+  }
+
+
 }

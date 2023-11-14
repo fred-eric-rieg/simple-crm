@@ -14,7 +14,22 @@ interface Task {
   geaendert: Timestamp;
   deadline: Timestamp;
   wert: number;
-  posten: string[];
+  posten: Posten[];
+}
+
+interface Posten {
+  anzahl: number;
+  produkt: string;
+}
+
+interface Produkt {
+  id: number;
+  fid: string;
+  name: string;
+  beschreibung: string;
+  preis: number;
+  erstellt: Timestamp;
+  geaendert: Timestamp;
 }
 
 @Component({
@@ -50,6 +65,27 @@ export class AuftraegeDetailsComponent {
     });
     return name;
   }
+
+  formatProduct(product: string) {
+    let name = "";
+    this.fs.products.getValue()?.forEach(p => {
+      if (p.fid === product) {
+        name = p.name;
+      }
+    });
+    return name;
+  }
+
+
+  getSum(posten: Posten) {
+    let preis = 0;
+    this.fs.products.getValue()?.forEach(p => {
+      if (p.fid === posten.produkt) {
+        preis = p.preis;
+      }
+    });
+    return preis * posten.anzahl;
+  } 
   
 
   openDialog(task: Task) {
