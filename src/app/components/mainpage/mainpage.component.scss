@@ -1,9 +1,12 @@
 .flexing {
     display: flex;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    bottom: 0;
     width: 100%;
-    max-width: 100%;
-    height: calc(100% - 64px);
-    overflow-x: hidden;
+    overflow-x: scroll;
 }
 
 .absolute-box {
@@ -17,7 +20,7 @@
 
 @media screen and (max-width: 600px) {
     .flexing {
-        height: calc(100% - 56px);
+        top: 56px;
     }
 
     .absolute-box {

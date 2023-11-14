@@ -9,33 +9,13 @@
 
 table {
     width: 100%;
-    border-collapse: collapse;
-}
-
-table, th, td {
-    border: 1px solid black;
-    padding: 5px;
-    text-align: left;
-}
-
-th {
-    background-color: #3f51b5;
-    color: white;
-}
-
-.hover-row {
-    transition: all 125ms ease-in-out;
-    background-color: white;
-    cursor: pointer;
-}
-
-.hover-row:hover {
-    transition: all 125ms ease-in-out;
-    background-color: #9299be;
-    color: white;
-}
-
-.sort {
-    cursor: pointer;
-    display: flex;
-}
+  }
+  
+  .mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  td, th {
+    width: 25%;
+  }

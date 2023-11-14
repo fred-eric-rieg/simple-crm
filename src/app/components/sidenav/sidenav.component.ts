@@ -35,7 +35,6 @@ export class SidenavComponent implements OnDestroy, OnInit {
     this.router.navigate([url]);
     // Auto close sidenav on mobile
     if (window.innerWidth < 600) {
-      console.log(window.innerWidth)
       this.snav.toggle();
       this.snavservice.toggled = !this.snavservice.toggled;
     }

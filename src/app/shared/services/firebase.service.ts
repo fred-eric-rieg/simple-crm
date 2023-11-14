@@ -46,7 +46,6 @@ export class FirebaseService implements OnDestroy {
       customers.length = 0; // Clear array to prevent duplicates.
 
       querySnapshot.forEach((doc) => {
-        console.log(doc.data());
         customers.push(doc.data() as Customer);
       });
     });

@@ -13,6 +13,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { MainpageComponent } from './components/mainpage/mainpage.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
@@ -43,7 +46,7 @@ console.log('%cThis is the development environment.', 'color: orange; font-size:
     KundenComponent,
     AuftraegeComponent,
     AddCustomerComponent,
-    SortIdPipe
+    SortIdPipe,
   ],
   imports: [
     BrowserModule,
@@ -57,6 +60,9 @@ console.log('%cThis is the development environment.', 'color: orange; font-size:
     MatFormFieldModule,
     MatInputModule,
     MatDialogModule,
+    MatSortModule,
+    MatTableModule,
+    MatPaginatorModule,
     FormsModule,
 
     provideFirebaseApp(() => initializeApp(environment.firebase)),
