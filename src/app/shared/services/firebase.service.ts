@@ -186,10 +186,10 @@ export class FirebaseService implements OnDestroy {
     const docRef = doc(db, 'auftraege', task.fid);
 
     await updateDoc(docRef, {
+      id: task.id,
       unternehmen: task.unternehmen,
       anmerkungen: task.anmerkungen,
       deadline: task.deadline,
-      wert: task.wert,
       posten: task.posten,
       status: task.status,
       geaendert: Timestamp.fromDate(new Date())

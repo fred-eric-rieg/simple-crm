@@ -43,6 +43,10 @@ export class EditTaskComponent implements AfterViewInit {
     geaendert: this.data.geaendert,
   }
 
+  deadline: Date = this.data.deadline.toDate();
+
+  changeCounter: number = this.data.posten.length;
+
 
   @ViewChild('multiSelect') multiSelect: any;
 
@@ -61,18 +65,30 @@ export class EditTaskComponent implements AfterViewInit {
 
 
   ngAfterViewInit() {
-    console.log(this.multiSelect);
+    this.multiSelect.options.forEach((o: MatOption) => {
+      this.newTask.posten.forEach((p: Posten) => {
+        if (o.value == p.produkt) {
+          o.select();
+        }
+      });
+    });
   }
 
 
   async updateTask() {
     if (this.isStatusGreen()) {
-      console.log("before update ", this.newTask);
       let task: Task = {
-        ...this.newTask,
+        id: this.newTask.id,
+        fid: this.newTask.fid,
+        unternehmen: this.newTask.unternehmen,
+        anmerkungen: this.newTask.anmerkungen,
+        status: this.newTask.status,
+        posten: this.newTask.posten,
+        wert: this.newTask.wert,
+        erstellt: this.newTask.erstellt,
+        deadline: Timestamp.fromDate(this.deadline),
         geaendert: Timestamp.fromDate(new Date()),
       }
-      console.log("after update ", task);
       let res = await this.fs.updateTask(task);
       if (res) {
         console.log("Task updated");
@@ -116,15 +132,19 @@ export class EditTaskComponent implements AfterViewInit {
    * @param e as string array
    */
   onChangeProduct(e: string[]) {
-    this.newTask.posten = [];
-    e.forEach(fid => {
-      let pos: Posten = {
-        anzahl: 1,
-        produkt: ''
-      }
-      pos.produkt = fid;
-      this.newTask.posten.push(pos);
-    });
+    this.changeCounter--;
+    // All transfered values will be retained, otherwise the array will be overwritten.
+    if (this.changeCounter < 0) {
+      this.newTask.posten = [];
+      e.forEach(fid => {
+        let pos: Posten = {
+          anzahl: 1,
+          produkt: ''
+        }
+        pos.produkt = fid;
+        this.newTask.posten.push(pos);
+      });
+    }
   }
 
   /**
