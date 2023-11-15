@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { AfterViewInit, Component, HostListener, ViewChild } from '@angular/core';
 import { Timestamp } from '@angular/fire/firestore';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FirebaseService } from 'src/app/shared/services/firebase.service';
@@ -25,13 +25,26 @@ interface Posten {
   templateUrl: './add-task.component.html',
   styleUrls: ['./add-task.component.scss']
 })
-export class AddTaskComponent {
+export class AddTaskComponent implements AfterViewInit {
   windowWidth: number = 0;
 
-  id: number = 0;
-  posten: Posten[] = [];
-  unternehmen: string = '';
-  anmerkungen: string = '';
+  newTask: Task = {
+    id: 0,
+    fid: '',
+    unternehmen: '',
+    anmerkungen: '',
+    deadline: Timestamp.fromDate(new Date()),
+    posten: [],
+    wert: 0,
+    erstellt: Timestamp.fromDate(new Date()),
+    geaendert: Timestamp.fromDate(new Date()),
+  }
+
+  prodIds: string[] = [];
+
+  @ViewChild('multiSelect') multiSelect: any;
+
+
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
@@ -43,49 +56,59 @@ export class AddTaskComponent {
     public fs: FirebaseService,
   ) {
     this.windowWidth = window.innerWidth;
-    let length = this.fs.tasks.getValue()?.length;
-    length ? this.id = length + 1 : this.id = 1;
+  }
+
+
+  ngAfterViewInit(): void {
+      console.log(this.multiSelect);
   }
 
 
   async createTask() {
-    if (this.isStatusGreen()) {
-      let task: any = {
-        id: 0,
-        fid: '',
-        posten: this.posten,
-        unternehmen: this.unternehmen,
-        anmerkungen: this.anmerkungen,
-        erstellt: Timestamp.now(),
-        geaendert: Timestamp.now()
-      }
-      let length = this.fs.tasks.getValue()?.length;
-      length ? task.id = length + 1 : task.id = 1;
-      let res = await this.fs.createTask(task);
-      if (res) {
-        console.log("Task created");
-        this.dialogRef.close();
-      } else {
-        console.log("Your mom again");
-      }
-    } else {
-      console.log("Your mom")
+    let task: any = {
+      id: 0,
+      fid: '',
+      posten: this.newTask.posten,
+      deadline: Timestamp.fromDate(new Date()),
+      unternehmen: this.newTask.unternehmen,
+      anmerkungen: this.newTask.anmerkungen,
+      erstellt: Timestamp.fromDate(new Date()),
+      geaendert: Timestamp.fromDate(new Date())
     }
+    console.log(task);
+    let length = this.fs.tasks.getValue()?.length;
+    length ? task.id = length + 1 : task.id = 1;
+    /**let res = await this.fs.createTask(task);
+    if (res) {
+      console.log("Task created");
+      this.dialogRef.close();
+    } else {
+      console.log("Your mom again");
+    }**/
   }
 
 
-  isStatusGreen() {
-    if (this.id === null) return false;
-    if (this.unternehmen === '') return false;
-    if (this.posten.length === 0) return false;
-    return true;
+  onChangeProduct(e: string[]) {
+    this.newTask.posten = [];
+    e.forEach(fid => {
+      let pos: Posten = {
+        anzahl: 1,
+        produkt: ''
+      }
+      pos.produkt = fid;
+      this.newTask.posten.push(pos);
+    });
   }
 
-
-  getProduct(product: string) {
+  /**
+   * Replaces a product id with its name.
+   * @param pos as Posten
+   * @returns a string
+   */
+  getProduct(pos: string) {
     let name: string = '';
     this.fs.products.getValue()?.forEach((p: any) => {
-      if (p.fid == product) {
+      if (p.fid == pos) {
         name = p.name;
       }
     });
@@ -93,19 +116,8 @@ export class AddTaskComponent {
   }
 
 
-  onPostenChange(event: any) {
-    this.posten.length = 0;
-    event.forEach((e: any) => {
-      let posten: Posten = {
-        anzahl: 1,
-        produkt: e
-      }
-      this.posten.push(posten);
-    });
+  removePosten(i: number) {
+    this.newTask.posten.splice(i, 1);
   }
 
-
-  updateCounter(event: any, index: number) {
-    this.posten[index].anzahl = event.target.valueAsNumber;
-  }
 }

@@ -32,6 +32,7 @@ export class EditTaskComponent {
   unternehmen: string = this.data.unternehmen;
   anmerkungen: string = this.data.anmerkungen;
   posten: Posten[] = this.data.posten;
+  deadline: Date = this.data.deadline.toDate();
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {

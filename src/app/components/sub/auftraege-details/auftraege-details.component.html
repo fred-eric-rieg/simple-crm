@@ -4,19 +4,19 @@
     </div>
     
 
-    <mat-card *ngFor="let task of fs.tasks | async" class="padding">
+    <mat-card *ngFor="let task of fs.tasks | async | filterTaskId: task" class="padding">
 
         <div class="flex-column">
-            <h2># {{task.id}}</h2>
+            <h2># {{task.id}} Auftrag</h2>
             <span class="subtitle">{{formatCustomer(task.unternehmen)}}</span>
         </div>
 
         <div class="flex-row">
             <div class="flex-column">
-                <span class="subtitle">Details </span>
-                <span *ngFor="let posten of task.posten; index as i">Posten {{i + 1}}: {{formatProduct(posten.produkt)}} x {{posten.anzahl}} = {{getSum(posten)}} €</span>
-                <span>Gesamtwert Netto: {{task.wert}} €</span>
-                <p>Deadline: {{formatDate(task.deadline) | date: 'medium'}}</p>
+                <span class="subtitle">Posten </span>
+                <span class="align-right" *ngFor="let posten of task.posten; index as i">Posten {{i + 1}}: {{formatProduct(posten.produkt)}} x {{posten.anzahl}} = {{getSum(posten)}} €</span>
+                <p class="align-right">Gesamtwert Netto: {{getTotal(task.posten)}} €</p>
+                
             </div>
         </div>
 
@@ -24,6 +24,7 @@
             <div class="flex-column">
                 <span class="subtitle">Anmerkungen</span>
                 <p>{{task.anmerkungen}}</p>
+                <span>Deadline: {{formatDate(task.deadline) | date: 'dd.MM.yyyy'}}</span>
                 <span>Erstellt: {{formatDate(task.erstellt) | date: 'medium'}}</span>
                 <p>Geändert: {{formatDate(task.geaendert) | date: 'medium'}}</p>
             </div>

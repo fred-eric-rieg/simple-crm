@@ -19,6 +19,14 @@
         </mat-form-field>
 
         <mat-form-field>
+            <mat-label>Deadline</mat-label>
+            <input matInput [matDatepicker]="picker" [value]="deadline">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
             <mat-label>Posten</mat-label>
             <mat-select required="" multiple="true" [value]="getProductIds()" (valueChange)="onPostenChange($event)">
                 <mat-option *ngFor="let product of fs.products | async" [value]="product.fid">
@@ -30,7 +38,7 @@
         <div class="flex-column" *ngIf="posten.length > 0">
             Posten:
             <div *ngFor="let pos of posten; index as i" class="flex-row"><span>{{getProduct(pos.produkt)}} x </span><input
-                    type="number" [placeholder]="pos.anzahl" [value]="pos.anzahl" class="mini-input" (change)="updateCounter($event, i)"></div>
+                    type="number" min="1" [placeholder]="pos.anzahl" [value]="pos.anzahl" class="mini-input" (change)="updateCounter($event, i)"></div>
         </div>
 
         <mat-form-field>

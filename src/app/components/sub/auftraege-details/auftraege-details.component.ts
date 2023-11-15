@@ -85,7 +85,20 @@ export class AuftraegeDetailsComponent {
       }
     });
     return preis * posten.anzahl;
-  } 
+  }
+
+
+  getTotal(posten: Posten[]) {
+    let total = 0;
+    posten.forEach(p => {
+      this.fs.products.getValue()?.forEach(product => {
+        if (product.fid === p.produkt) {
+          total += product.preis * p.anzahl;
+        }
+      });
+    });
+    return total;
+  }
   
 
   openDialog(task: Task) {

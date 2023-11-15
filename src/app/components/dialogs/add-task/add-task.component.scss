@@ -19,3 +19,25 @@
     box-sizing: border-box;
     border-bottom: 1px solid #ccc;
 }
+
+.flex-row-space {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flex-row-gap {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items: center;
+    margin-left: 1rem;
+}
+
+.short {
+    white-space: nowrap;
+    overflow: hidden;
+    width: 150px;
+    text-overflow: "...";
+}

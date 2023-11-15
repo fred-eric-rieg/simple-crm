@@ -156,6 +156,8 @@ export class FirebaseService implements OnDestroy {
       id: task.id,
       unternehmen: task.unternehmen,
       anmerkungen: task.anmerkungen,
+      posten: task.posten,
+      deadline: task.deadline,
       erstellt: Timestamp.fromDate(new Date()),
       geaendert: Timestamp.fromDate(new Date())
     });

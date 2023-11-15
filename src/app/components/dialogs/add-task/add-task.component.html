@@ -5,13 +5,8 @@
 
     <div class="flex-column">
         <mat-form-field>
-            <mat-label>Rechnungsnummer</mat-label>
-            <input matInput [(ngModel)]="id" required="">
-        </mat-form-field>
-
-        <mat-form-field>
             <mat-label>Kunde</mat-label>
-            <mat-select required="" [(value)]="unternehmen">
+            <mat-select required="" [(value)]="newTask.unternehmen">
                 <mat-option *ngFor="let kunde of fs.customers | async" [value]="kunde.fid">
                     {{kunde.unternehmen}}
                 </mat-option>
@@ -19,23 +14,37 @@
         </mat-form-field>
 
         <mat-form-field>
+            <mat-label>Deadline</mat-label>
+            <input matInput [matDatepicker]="picker" required="" [(ngModel)]="newTask.deadline">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
             <mat-label>Posten</mat-label>
-            <mat-select required="" multiple="true" (valueChange)="onPostenChange($event)">
+            <mat-select multiple="true" (valueChange)="onChangeProduct($event)" #multiSelect [(ngModel)]="prodIds">
                 <mat-option *ngFor="let product of fs.products | async" [value]="product.fid">
                     {{product.name}}
                 </mat-option>
             </mat-select>
         </mat-form-field>
 
-        <div class="flex-column" *ngIf="posten.length > 0">
-            Posten:
-            <div *ngFor="let pos of posten; index as i" class="flex-row"><span>{{getProduct(pos.produkt)}} x </span><input type="number"
-                    placeholder="1" class="mini-input" (change)="updateCounter($event, i)"></div>
+        <div *ngFor="let posten of newTask.posten; let i = index">
+            <div class="flex-row-space">
+                <div class="short">
+                    <span>{{ getProduct(posten.produkt) }}</span>
+                </div>
+                <div class="flex-row-gap">
+                    <input type="number" min="1" class="mini-input">
+                    <button mat-icon-button (click)="removePosten(i)"><mat-icon>delete</mat-icon></button>
+                </div>
+            </div>
         </div>
 
         <mat-form-field>
             <mat-label>Anmerkungen</mat-label>
-            <input matInput [(ngModel)]="anmerkungen">
+            <input matInput [(ngModel)]="newTask.anmerkungen">
         </mat-form-field>
 
     </div>

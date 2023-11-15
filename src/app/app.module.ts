@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -18,6 +18,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 import { MainpageComponent } from './components/mainpage/mainpage.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
@@ -44,6 +46,8 @@ import { ProdukteComponent } from './components/sub/produkte/produkte.component'
 import { AddProductComponent } from './components/dialogs/add-product/add-product.component';
 import { ProdukteDetailsComponent } from './components/sub/produkte-details/produkte-details.component';
 import { EditProductComponent } from './components/dialogs/edit-product/edit-product.component';
+import { FilterTaskIdPipe } from './shared/pipes/filter-task-id.pipe';
+import { NullcheckPipe } from './shared/pipes/nullcheck.pipe';
 console.log('%cThis is the development environment.', 'color: orange; font-size: 18px; font-weight: bold;');
 
 
@@ -67,6 +71,8 @@ console.log('%cThis is the development environment.', 'color: orange; font-size:
     AddProductComponent,
     ProdukteDetailsComponent,
     EditProductComponent,
+    FilterTaskIdPipe,
+    NullcheckPipe,
   ],
   imports: [
     BrowserModule,
@@ -85,7 +91,10 @@ console.log('%cThis is the development environment.', 'color: orange; font-size:
     MatPaginatorModule,
     MatCardModule,
     MatSelectModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
     FormsModule,
+    ReactiveFormsModule,
 
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),

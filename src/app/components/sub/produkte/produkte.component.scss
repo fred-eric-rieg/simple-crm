@@ -3,8 +3,6 @@
     padding: 20px;
     height: 100%;
     width: 100%;
-    text-overflow: ellipsis;
-    overflow-y: scroll;
 }
 
 table {
@@ -26,4 +24,10 @@ th {
     display: flex;
     flex-direction: row;
     gap: 2rem;
+}
+
+.max-size {
+    display: block;
+    width: 100%;
+    overflow: auto;
 }
