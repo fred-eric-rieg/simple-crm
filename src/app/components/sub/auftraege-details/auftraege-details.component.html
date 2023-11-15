@@ -3,11 +3,11 @@
         <h1>Detailansicht Auftrag</h1> <button mat-raised-button [routerLink]="['/auftraege']"><mat-icon>keyboard_backspace</mat-icon>back</button>
     </div>
     
-
-    <mat-card *ngFor="let task of fs.tasks | async | filterTaskId: task" class="padding">
+<div *ngFor="let task of fs.tasks | async">
+    <mat-card *ngIf="task.fid == taskId" class="padding">
 
         <div class="flex-column">
-            <h2># {{task.id}} Auftrag</h2>
+            <h2>#{{task.id}} Auftrag</h2>
             <span class="subtitle">{{formatCustomer(task.unternehmen)}}</span>
         </div>
 
@@ -40,5 +40,7 @@
             </div>
         </div>
     </mat-card>
+</div>
+   
 
 </section>

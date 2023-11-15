@@ -38,7 +38,7 @@ interface Produkt {
   styleUrls: ['./auftraege-details.component.scss']
 })
 export class AuftraegeDetailsComponent {
-  task: string = '';
+  taskId: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -46,7 +46,7 @@ export class AuftraegeDetailsComponent {
     private dialog: MatDialog,
     public fs: FirebaseService,) {
     this.route.params.subscribe(params => {
-      this.task = params['id'];
+      this.taskId = params['id'];
     });
   }
 

@@ -77,7 +77,6 @@ export class EditCustomerComponent {
       erstellt: this.data.erstellt,
       geaendert: Timestamp.fromDate(new Date())
     }
-    console.log(customer);
     if (this.isStatusGreen()) {
       let res = await this.fs.updateCustomer(customer);
       if (res) {

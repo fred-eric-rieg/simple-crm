@@ -3,17 +3,17 @@
         <h1>Detailansicht Produkt</h1> <button mat-raised-button [routerLink]="['/produkte']"><mat-icon>keyboard_backspace</mat-icon>back</button>
     </div>
     
-
-    <mat-card *ngFor="let product of fs.products | async | filterProductId: product" class="padding">
+<div *ngFor="let product of fs.products | async">
+    <mat-card *ngIf="product.fid == productId" class="padding">
 
         <div class="flex-column">
-            <h2># {{product.id}} - {{product.name}}</h2>
+            <h2>#{{product.id}} {{product.name}}</h2>
         </div>
 
         <div class="flex-row">
             <div class="flex-column">
                 <span class="subtitle">Details </span>
-                <span>Stückpreis Netto: {{formatPrice(product.preis)}} €</span>
+                <span>Stückpreis Netto: {{product.preis | decimal}} €</span>
                 <p>Beschreibung: {{product.beschreibung}}</p>
             </div>
         </div>
@@ -33,5 +33,7 @@
             </div>
         </div>
     </mat-card>
+</div>
+    
 
 </section>

@@ -31,7 +31,7 @@
             <!-- Anmerkungen Column -->
             <ng-container matColumnDef="preis">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Stückpreis Netto </th>
-                <td mat-cell *matCellDef="let row" (click)="selectTask(row.fid)"> {{formatPrice(row.preis)}} € </td>
+                <td mat-cell *matCellDef="let row" (click)="selectTask(row.fid)"> {{row.preis | decimal}} € </td>
             </ng-container>
 
 

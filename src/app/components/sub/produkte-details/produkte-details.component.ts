@@ -21,7 +21,7 @@ interface Produkt {
   styleUrls: ['./produkte-details.component.scss']
 })
 export class ProdukteDetailsComponent {
-  product: string = '';
+  productId: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -29,7 +29,7 @@ export class ProdukteDetailsComponent {
     private dialog: MatDialog,
     public fs: FirebaseService,) {
     this.route.params.subscribe(params => {
-      this.product = params['id'];
+      this.productId = params['id'];
     });
   }
 

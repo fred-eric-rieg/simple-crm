@@ -37,7 +37,6 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
 // Currently using development environment
 import { environment } from 'src/environments/environment.development';
 import { KundenDetailsComponent } from './components/sub/kunden-details/kunden-details.component';
-import { FilterIdPipe } from './shared/pipes/filter-id.pipe';
 import { EditCustomerComponent } from './components/dialogs/edit-customer/edit-customer.component';
 import { AddTaskComponent } from './components/dialogs/add-task/add-task.component';
 import { AuftraegeDetailsComponent } from './components/sub/auftraege-details/auftraege-details.component';
@@ -46,9 +45,7 @@ import { ProdukteComponent } from './components/sub/produkte/produkte.component'
 import { AddProductComponent } from './components/dialogs/add-product/add-product.component';
 import { ProdukteDetailsComponent } from './components/sub/produkte-details/produkte-details.component';
 import { EditProductComponent } from './components/dialogs/edit-product/edit-product.component';
-import { FilterTaskIdPipe } from './shared/pipes/filter-task-id.pipe';
-import { NullcheckPipe } from './shared/pipes/nullcheck.pipe';
-import { FilterProductIdPipe } from './shared/pipes/filter-product-id.pipe';
+import { DecimalPipe } from './shared/pipes/decimal.pipe';
 console.log('%cThis is the development environment.', 'color: orange; font-size: 18px; font-weight: bold;');
 
 
@@ -63,7 +60,6 @@ console.log('%cThis is the development environment.', 'color: orange; font-size:
     AuftraegeComponent,
     AddCustomerComponent,
     KundenDetailsComponent,
-    FilterIdPipe,
     EditCustomerComponent,
     AddTaskComponent,
     AuftraegeDetailsComponent,
@@ -72,9 +68,7 @@ console.log('%cThis is the development environment.', 'color: orange; font-size:
     AddProductComponent,
     ProdukteDetailsComponent,
     EditProductComponent,
-    FilterTaskIdPipe,
-    NullcheckPipe,
-    FilterProductIdPipe,
+    DecimalPipe,
   ],
   imports: [
     BrowserModule,

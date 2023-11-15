@@ -119,7 +119,15 @@ export class FirebaseService implements OnDestroy {
     const docRef = doc(db, 'kunden', customer.fid);
 
     await updateDoc(docRef, {
-
+      vorname: customer.vorname,
+      nachname: customer.nachname,
+      unternehmen: customer.unternehmen,
+      email: customer.email,
+      telefon: customer.telefon,
+      strasse: customer.strasse,
+      plz: customer.plz,
+      ort: customer.ort,
+      anmerkungen: customer.anmerkungen,
       geaendert: Timestamp.fromDate(new Date())
     });
 
@@ -149,7 +157,6 @@ export class FirebaseService implements OnDestroy {
   }
 
   async createTask(task: any) {
-    console.log(task);
     const db = getFirestore();
     const collectionRef = collection(db, 'auftraege');
     let docRef = await addDoc(collectionRef, {
@@ -208,7 +215,6 @@ export class FirebaseService implements OnDestroy {
 
 
   async createProduct(product: any) {
-    console.log(product);
     const db = getFirestore();
     const collectionRef = collection(db, 'produkte');
     let docRef = await addDoc(collectionRef, {
@@ -224,6 +230,23 @@ export class FirebaseService implements OnDestroy {
 
     await updateDoc(doc(db, 'produkte', docId), {
       fid: docId
+    });
+
+    return true;
+  }
+
+
+  async updateProduct(product: any) {
+    console.log(product);
+    const db = getFirestore();
+    const docRef = doc(db, 'produkte', product.fid);
+
+    await updateDoc(docRef, {
+      id: product.id,
+      name: product.name,
+      beschreibung: product.beschreibung,
+      preis: product.preis,
+      geaendert: Timestamp.fromDate(new Date())
     });
 
     return true;
