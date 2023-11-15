@@ -14,7 +14,7 @@ export class SidenavComponent implements OnDestroy, OnInit {
   @ViewChild('snav') snav: any;
 
   constructor(
-    private snavservice: SidenavService,
+    public snavservice: SidenavService,
     private router: Router,
   ) { }
 
@@ -33,6 +33,11 @@ export class SidenavComponent implements OnDestroy, OnInit {
 
   open(url: string) {
     this.router.navigate([url]);
+    this.snav.toggle();
+    this.snavservice.toggled = !this.snavservice.toggled;
+  }
+
+  toggle() {
     this.snav.toggle();
     this.snavservice.toggled = !this.snavservice.toggled;
   }
