@@ -112,6 +112,28 @@ export class AuftraegeComponent implements AfterViewInit {
   }
 
 
+  formatPrice(price: number) {
+    return (Math.round((price) * 100) / 100).toFixed(2);
+  }
+
+
+  calculateTotal(fid: string) {
+    let total = 0;
+    this.fs.tasks.getValue()?.forEach(task => {
+      if (task.fid === fid) {
+        task.posten.forEach(posten => {
+          this.fs.products.getValue()?.forEach(product => {
+            if (product.fid === posten.produkt) {
+              total += posten.anzahl * product.preis;
+            }
+          });
+        });
+      }
+    });
+    return this.formatPrice(total);
+  }
+
+
   selectTask(fid: string) {
     this.router.navigate(['auftraege/', fid]);
   }

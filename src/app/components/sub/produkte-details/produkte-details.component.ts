@@ -37,6 +37,11 @@ export class ProdukteDetailsComponent {
   formatDate(date: Timestamp) {
     return date.toDate();
   }
+
+
+  formatPrice(price: number) {
+    return (Math.round((price) * 100) / 100).toFixed(2);
+  }
   
 
   openDialog(product: Produkt) {

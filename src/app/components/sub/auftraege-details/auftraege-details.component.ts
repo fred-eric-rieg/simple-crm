@@ -84,7 +84,7 @@ export class AuftraegeDetailsComponent {
         preis = p.preis;
       }
     });
-    return preis * posten.anzahl;
+    return (Math.round((preis * posten.anzahl) * 100) / 100).toFixed(2);
   }
 
 
@@ -97,7 +97,7 @@ export class AuftraegeDetailsComponent {
         }
       });
     });
-    return total;
+    return (Math.round((total) * 100) / 100).toFixed(2);
   }
   
 

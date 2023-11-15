@@ -4,17 +4,16 @@
     </div>
     
 
-    <mat-card *ngFor="let product of fs.products | async" class="padding">
+    <mat-card *ngFor="let product of fs.products | async | filterProductId: product" class="padding">
 
         <div class="flex-column">
-            <h2># {{product.id}}</h2>
-            <span class="subtitle">{{product.name}}</span>
+            <h2># {{product.id}} - {{product.name}}</h2>
         </div>
 
         <div class="flex-row">
             <div class="flex-column">
                 <span class="subtitle">Details </span>
-                <span>Stückpreis Netto: {{product.preis}} €</span>
+                <span>Stückpreis Netto: {{formatPrice(product.preis)}} €</span>
                 <p>Beschreibung: {{product.beschreibung}}</p>
             </div>
         </div>

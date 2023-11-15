@@ -105,6 +105,11 @@ export class ProdukteComponent implements AfterViewInit {
     return name;
   }
 
+  
+  formatPrice(price: number) {
+    return (Math.round((price) * 100) / 100).toFixed(2);
+  }
+
 
   selectTask(fid: string) {
     this.router.navigate(['produkte/', fid]);

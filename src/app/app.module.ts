@@ -48,6 +48,7 @@ import { ProdukteDetailsComponent } from './components/sub/produkte-details/prod
 import { EditProductComponent } from './components/dialogs/edit-product/edit-product.component';
 import { FilterTaskIdPipe } from './shared/pipes/filter-task-id.pipe';
 import { NullcheckPipe } from './shared/pipes/nullcheck.pipe';
+import { FilterProductIdPipe } from './shared/pipes/filter-product-id.pipe';
 console.log('%cThis is the development environment.', 'color: orange; font-size: 18px; font-weight: bold;');
 
 
@@ -73,6 +74,7 @@ console.log('%cThis is the development environment.', 'color: orange; font-size:
     EditProductComponent,
     FilterTaskIdPipe,
     NullcheckPipe,
+    FilterProductIdPipe,
   ],
   imports: [
     BrowserModule,
