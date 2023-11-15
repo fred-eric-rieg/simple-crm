@@ -1,46 +1,54 @@
 <section class="main-box">
     <div class="flex-row">
-        <h1>Detailansicht Auftrag</h1> <button mat-raised-button [routerLink]="['/auftraege']"><mat-icon>keyboard_backspace</mat-icon>back</button>
+        <h1>Detailansicht Auftrag</h1> <button mat-raised-button
+            [routerLink]="['/auftraege']"><mat-icon>keyboard_backspace</mat-icon>back</button>
     </div>
-    
-<div *ngFor="let task of fs.tasks | async">
-    <mat-card *ngIf="task.fid == taskId" class="padding">
 
-        <div class="flex-column">
-            <h2>#{{task.id}} Auftrag</h2>
-            <span class="subtitle">{{formatCustomer(task.unternehmen)}}</span>
-        </div>
+    <div *ngFor="let task of fs.tasks | async">
+        <mat-card *ngIf="task.fid == taskId" class="padding">
 
-        <div class="flex-row">
             <div class="flex-column">
-                <span class="subtitle">Posten </span>
-                <div class="flex-row-space" *ngFor="let posten of task.posten; index as i">
-                   <div class="width-fit align-left">{{formatProduct(posten.produkt)}} x {{posten.anzahl}} = </div>
-                   <div class="width-fit align-right">{{getSum(posten)}} €</div>
+                <h2>#{{task.id}} Auftrag</h2>
+                <span class="subtitle">{{formatCustomer(task.unternehmen)}}</span>
+            </div>
+
+            <div class="flex-row">
+                <div class="flex-column">
+                    <span class="subtitle">Posten </span>
+                    <div class="flex-row-space" *ngFor="let posten of task.posten; index as i">
+                        <div class="width-fit align-left">{{formatProduct(posten.produkt)}} x {{posten.anzahl}} = </div>
+                        <div class="width-fit align-right">{{getSum(posten)}} €</div>
+                    </div>
+                    <p class="align-right margin">Netto gesamt: {{getTotal(task.posten)}} €</p>
+
                 </div>
-                <p class="align-right margin">Netto gesamt: {{getTotal(task.posten)}} €</p>
-                
             </div>
-        </div>
 
-        <div class="flex-row">
-            <div class="flex-column">
-                <span class="subtitle">Anmerkungen</span>
-                <p>{{task.anmerkungen}}</p>
-                <span>Deadline: {{formatDate(task.deadline) | date: 'dd.MM.yyyy'}}</span>
-                <span>Erstellt: {{formatDate(task.erstellt) | date: 'medium'}}</span>
-                <p>Geändert: {{formatDate(task.geaendert) | date: 'medium'}}</p>
+            <div class="flex-row">
+                <div class="flex-column">
+                    <span class="subtitle">Anmerkungen</span>
+                    <p>{{task.anmerkungen}}</p>
+                    <span>Deadline: {{formatDate(task.deadline) | date: 'dd.MM.yyyy'}}</span>
+                    <span>Erstellt: {{formatDate(task.erstellt) | date: 'medium'}}</span>
+                    <p>Geändert: {{formatDate(task.geaendert) | date: 'medium'}}</p>
+                </div>
             </div>
-        </div>
 
-        <div class="flex-row">
-            <div class="flex-column">
-                <button mat-raised-button color="primary"
-                    (click)="openDialog(task)"><mat-icon>edit</mat-icon>Bearbeiten</button>
+            <div class="flex-row">
+                <div class="flex-column">
+                    <button mat-raised-button color="primary"
+                        (click)="openDialog(task)"><mat-icon>edit</mat-icon>Bearbeiten</button>
+                </div>
             </div>
-        </div>
-    </mat-card>
-</div>
-   
+
+            <div class="flex-row margin-top">
+                <div class="flex-column">
+                    <button mat-raised-button color="primary"
+                        (click)="createPdf(task)"><mat-icon>picture_as_pdf</mat-icon>Rechnung erstellen</button>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+
 
 </section>
