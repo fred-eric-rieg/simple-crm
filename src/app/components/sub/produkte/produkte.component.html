@@ -30,8 +30,8 @@
 
             <!-- Anmerkungen Column -->
             <ng-container matColumnDef="preis">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Preis Netto </th>
-                <td mat-cell *matCellDef="let row" (click)="selectTask(row.fid)"> {{row.preis}} </td>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Stückpreis Netto </th>
+                <td mat-cell *matCellDef="let row" (click)="selectTask(row.fid)"> {{row.preis}} € </td>
             </ng-container>
 
 
