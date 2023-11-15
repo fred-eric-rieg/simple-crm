@@ -31,6 +31,7 @@ interface Task {
   deadline: Timestamp;
   wert: number;
   posten: Posten[];
+  status: string;
 }
 
 interface Posten {
@@ -165,6 +166,7 @@ export class FirebaseService implements OnDestroy {
       anmerkungen: task.anmerkungen,
       posten: task.posten,
       deadline: task.deadline,
+      status: task.status,
       erstellt: Timestamp.fromDate(new Date()),
       geaendert: Timestamp.fromDate(new Date())
     });
@@ -189,6 +191,7 @@ export class FirebaseService implements OnDestroy {
       deadline: task.deadline,
       wert: task.wert,
       posten: task.posten,
+      status: task.status,
       geaendert: Timestamp.fromDate(new Date())
     });
 

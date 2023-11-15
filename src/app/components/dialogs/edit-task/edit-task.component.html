@@ -6,12 +6,12 @@
     <div class="flex-column">
         <mat-form-field>
             <mat-label>Rechnungsnummer</mat-label>
-            <input matInput [(ngModel)]="id" required="">
+            <input matInput [(ngModel)]="newTask.id" required="">
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>Kunde</mat-label>
-            <mat-select required="" [(value)]="unternehmen">
+            <mat-select required="" [(value)]="newTask.unternehmen">
                 <mat-option *ngFor="let kunde of fs.customers | async" [value]="kunde.fid">
                     {{kunde.unternehmen}}
                 </mat-option>
@@ -20,7 +20,7 @@
 
         <mat-form-field>
             <mat-label>Deadline</mat-label>
-            <input matInput [matDatepicker]="picker" [value]="deadline">
+            <input matInput [matDatepicker]="picker" [value]="newTask.deadline">
             <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
@@ -28,22 +28,46 @@
 
         <mat-form-field>
             <mat-label>Posten</mat-label>
-            <mat-select required="" multiple="true" [value]="getProductIds()" (valueChange)="onPostenChange($event)">
+            <mat-select multiple="true" (valueChange)="onChangeProduct($event)" #multiSelect>
                 <mat-option *ngFor="let product of fs.products | async" [value]="product.fid">
                     {{product.name}}
                 </mat-option>
             </mat-select>
         </mat-form-field>
 
-        <div class="flex-column" *ngIf="posten.length > 0">
-            Posten:
-            <div *ngFor="let pos of posten; index as i" class="flex-row"><span>{{getProduct(pos.produkt)}} x </span><input
-                    type="number" min="1" [placeholder]="pos.anzahl" [value]="pos.anzahl" class="mini-input" (change)="updateCounter($event, i)"></div>
+        <div *ngFor="let posten of newTask.posten; let i = index">
+            <div class="flex-row-space">
+                <div class="short">
+                    <span>{{ getProduct(posten.produkt) }}</span>
+                </div>
+                <div class="flex-row-gap">
+                    <input type="number" min="1" class="mini-input" [(ngModel)]="posten.anzahl">
+                    <button mat-icon-button (click)="removePosten(i, posten.produkt)"><mat-icon>delete</mat-icon></button>
+                </div>
+            </div>
         </div>
 
         <mat-form-field>
+            <mat-label>Status</mat-label>
+            <mat-select required="" [(value)]="newTask.status">
+                <mat-option value="in Bearbeitung">
+                    in Bearbeitung
+                </mat-option>
+                <mat-option value="Rechnung verschickt">
+                    Rechnung verschickt
+                </mat-option>
+                <mat-option value="versandt">
+                    versandt
+                </mat-option>
+                <mat-option value="bezahlt">
+                    bezahlt
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
             <mat-label>Anmerkungen</mat-label>
-            <input matInput [(ngModel)]="anmerkungen" required="">
+            <input matInput [(ngModel)]="newTask.anmerkungen" required="">
         </mat-form-field>
 
     </div>

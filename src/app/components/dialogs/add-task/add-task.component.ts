@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, HostListener, ViewChild } from '@angular/core';
 import { Timestamp } from '@angular/fire/firestore';
+import { MatOption } from '@angular/material/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FirebaseService } from 'src/app/shared/services/firebase.service';
 
@@ -13,6 +14,7 @@ interface Task {
   deadline: Timestamp;
   wert: number;
   posten: Posten[];
+  status: string;
 }
 
 interface Posten {
@@ -36,15 +38,12 @@ export class AddTaskComponent implements AfterViewInit {
     deadline: Timestamp.fromDate(new Date()),
     posten: [],
     wert: 0,
+    status: 'in Bearbeitung',
     erstellt: Timestamp.fromDate(new Date()),
     geaendert: Timestamp.fromDate(new Date()),
   }
 
-  prodIds: string[] = [];
-
   @ViewChild('multiSelect') multiSelect: any;
-
-
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
@@ -69,25 +68,29 @@ export class AddTaskComponent implements AfterViewInit {
       id: 0,
       fid: '',
       posten: this.newTask.posten,
-      deadline: Timestamp.fromDate(new Date()),
+      deadline: this.newTask.deadline,
       unternehmen: this.newTask.unternehmen,
       anmerkungen: this.newTask.anmerkungen,
+      status: this.newTask.status,
       erstellt: Timestamp.fromDate(new Date()),
       geaendert: Timestamp.fromDate(new Date())
     }
     console.log(task);
     let length = this.fs.tasks.getValue()?.length;
     length ? task.id = length + 1 : task.id = 1;
-    /**let res = await this.fs.createTask(task);
+    let res = await this.fs.createTask(task);
     if (res) {
       console.log("Task created");
       this.dialogRef.close();
     } else {
       console.log("Your mom again");
-    }**/
+    }
   }
 
-
+  /**
+   * On each change of the multiselect, the new task's posten array is updated.
+   * @param e as string array
+   */
   onChangeProduct(e: string[]) {
     this.newTask.posten = [];
     e.forEach(fid => {
@@ -115,9 +118,18 @@ export class AddTaskComponent implements AfterViewInit {
     return name;
   }
 
-
-  removePosten(i: number) {
+  /**
+   * Removes a product from the new task's posten array and deselects it in the multiselect.
+   * @param i as index number
+   * @param fid as id of the product
+   */
+  removePosten(i: number, fid: string) {
     this.newTask.posten.splice(i, 1);
+    this.multiSelect.options.forEach((o: MatOption) => {
+      if (o.value == fid) {
+        o.deselect();
+      }
+    });
   }
 
 }

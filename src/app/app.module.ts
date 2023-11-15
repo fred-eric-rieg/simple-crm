@@ -46,6 +46,9 @@ import { AddProductComponent } from './components/dialogs/add-product/add-produc
 import { ProdukteDetailsComponent } from './components/sub/produkte-details/produkte-details.component';
 import { EditProductComponent } from './components/dialogs/edit-product/edit-product.component';
 import { DecimalPipe } from './shared/pipes/decimal.pipe';
+import { StatusRedDirective } from './shared/directives/status-red.directive';
+import { StatusOrangeDirective } from './shared/directives/status-orange.directive';
+import { StatusGreenDirective } from './shared/directives/status-green.directive';
 console.log('%cThis is the development environment.', 'color: orange; font-size: 18px; font-weight: bold;');
 
 
@@ -69,6 +72,9 @@ console.log('%cThis is the development environment.', 'color: orange; font-size:
     ProdukteDetailsComponent,
     EditProductComponent,
     DecimalPipe,
+    StatusRedDirective,
+    StatusOrangeDirective,
+    StatusGreenDirective,
   ],
   imports: [
     BrowserModule,

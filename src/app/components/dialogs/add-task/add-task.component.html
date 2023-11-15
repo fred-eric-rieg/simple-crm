@@ -23,7 +23,7 @@
 
         <mat-form-field>
             <mat-label>Posten</mat-label>
-            <mat-select multiple="true" (valueChange)="onChangeProduct($event)" #multiSelect [(ngModel)]="prodIds">
+            <mat-select multiple="true" (valueChange)="onChangeProduct($event)" #multiSelect>
                 <mat-option *ngFor="let product of fs.products | async" [value]="product.fid">
                     {{product.name}}
                 </mat-option>
@@ -36,11 +36,29 @@
                     <span>{{ getProduct(posten.produkt) }}</span>
                 </div>
                 <div class="flex-row-gap">
-                    <input type="number" min="1" class="mini-input">
-                    <button mat-icon-button (click)="removePosten(i)"><mat-icon>delete</mat-icon></button>
+                    <input type="number" min="1" class="mini-input" [(ngModel)]="posten.anzahl">
+                    <button mat-icon-button (click)="removePosten(i, posten.produkt)"><mat-icon>delete</mat-icon></button>
                 </div>
             </div>
         </div>
+
+        <mat-form-field>
+            <mat-label>Status</mat-label>
+            <mat-select required="" [(value)]="newTask.status">
+                <mat-option value="in Bearbeitung">
+                    in Bearbeitung
+                </mat-option>
+                <mat-option value="Rechnung verschickt">
+                    Rechnung verschickt
+                </mat-option>
+                <mat-option value="versandt">
+                    versandt
+                </mat-option>
+                <mat-option value="bezahlt">
+                    bezahlt
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
 
         <mat-form-field>
             <mat-label>Anmerkungen</mat-label>

@@ -1,5 +1,6 @@
-import { Component, HostListener, Inject } from '@angular/core';
+import { AfterViewInit, Component, HostListener, Inject, ViewChild } from '@angular/core';
 import { Timestamp } from '@angular/fire/firestore';
+import { MatOption } from '@angular/material/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FirebaseService } from 'src/app/shared/services/firebase.service';
 
@@ -13,6 +14,7 @@ interface Task {
   deadline: Timestamp;
   wert: number;
   posten: Posten[];
+  status: string;
 }
 
 interface Posten {
@@ -25,14 +27,24 @@ interface Posten {
   templateUrl: './edit-task.component.html',
   styleUrls: ['./edit-task.component.scss']
 })
-export class EditTaskComponent {
+export class EditTaskComponent implements AfterViewInit {
   windowWidth: number = 0;
 
-  id: number = this.data.id;
-  unternehmen: string = this.data.unternehmen;
-  anmerkungen: string = this.data.anmerkungen;
-  posten: Posten[] = this.data.posten;
-  deadline: Date = this.data.deadline.toDate();
+  newTask: Task = {
+    id: this.data.id,
+    fid: this.data.fid,
+    unternehmen: this.data.unternehmen,
+    anmerkungen: this.data.anmerkungen,
+    deadline: this.data.deadline,
+    posten: this.data.posten,
+    wert: this.data.wert,
+    status: this.data.status,
+    erstellt: this.data.erstellt,
+    geaendert: this.data.geaendert,
+  }
+
+
+  @ViewChild('multiSelect') multiSelect: any;
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
@@ -48,13 +60,19 @@ export class EditTaskComponent {
   }
 
 
+  ngAfterViewInit() {
+    console.log(this.multiSelect);
+  }
+
+
   async updateTask() {
     if (this.isStatusGreen()) {
-      let task: any = {
-        fid: '',
-        unternehmen: this.unternehmen,
-        anmerkungen: this.anmerkungen,
+      console.log("before update ", this.newTask);
+      let task: Task = {
+        ...this.newTask,
+        geaendert: Timestamp.fromDate(new Date()),
       }
+      console.log("after update ", task);
       let res = await this.fs.updateTask(task);
       if (res) {
         console.log("Task updated");
@@ -69,9 +87,12 @@ export class EditTaskComponent {
 
 
   isStatusGreen() {
-    if (this.id === null) return false;
-    if (this.unternehmen === '') return false;
-    if (this.anmerkungen === '') return false;
+    if (this.newTask.id === null) return false;
+    if (this.newTask.unternehmen === '') return false;
+    if (this.newTask.anmerkungen === '') return false;
+    if (this.newTask.deadline === null) return false;
+    if (this.newTask.posten.length === 0) return false;
+    if (this.newTask.status === '') return false;
     return true;
   }
 
@@ -91,34 +112,32 @@ export class EditTaskComponent {
   }
 
   /**
-   * Listens to the event emitted by the product selector.
-   * @param event any
+   * On each change of the multiselect, the new task's posten array is updated.
+   * @param e as string array
    */
-  onPostenChange(event: any) {
-    this.posten.length = 0;
-    event.forEach((e: any) => {
-      let posten: Posten = {
+  onChangeProduct(e: string[]) {
+    this.newTask.posten = [];
+    e.forEach(fid => {
+      let pos: Posten = {
         anzahl: 1,
-        produkt: e
+        produkt: ''
       }
-      this.posten.push(posten);
+      pos.produkt = fid;
+      this.newTask.posten.push(pos);
     });
-  }
-
-
-  updateCounter(event: any, index: number) {
-    this.posten[index].anzahl = event.target.valueAsNumber;
   }
 
   /**
-   * Extracts the product ids from the posten array.
-   * @returns Array of product ids
-   */
-  getProductIds() {
-    return this.data.posten.map((p: any) => {
-      return p.produkt;
+     * Removes a product from the new task's posten array and deselects it in the multiselect.
+     * @param i as index number
+     * @param fid as id of the product
+     */
+  removePosten(i: number, fid: string) {
+    this.newTask.posten.splice(i, 1);
+    this.multiSelect.options.forEach((o: MatOption) => {
+      if (o.value == fid) {
+        o.deselect();
+      }
     });
   }
-
-
 }
