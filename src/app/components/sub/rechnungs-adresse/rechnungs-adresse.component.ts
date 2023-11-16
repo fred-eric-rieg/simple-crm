@@ -22,6 +22,7 @@ interface Address {
   kunde: string;
   vorname: string;
   nachname: string;
+  unternehmen: string;
   strasse: string;
   plz: number;
   ort: string;
