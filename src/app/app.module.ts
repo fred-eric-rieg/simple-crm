@@ -53,6 +53,7 @@ import { StatusGreenDirective } from './shared/directives/status-green.directive
 import { LieferAdresseComponent } from './components/sub/liefer-adresse/liefer-adresse.component';
 import { RechnungsAdresseComponent } from './components/sub/rechnungs-adresse/rechnungs-adresse.component';
 import { EditAddressComponent } from './components/dialogs/edit-address/edit-address.component';
+import { TodoPipe } from './shared/pipes/todo.pipe';
 console.log('%cThis is the development environment.', 'color: orange; font-size: 18px; font-weight: bold;');
 
 
@@ -82,6 +83,7 @@ console.log('%cThis is the development environment.', 'color: orange; font-size:
     LieferAdresseComponent,
     RechnungsAdresseComponent,
     EditAddressComponent,
+    TodoPipe,
   ],
   imports: [
     BrowserModule,

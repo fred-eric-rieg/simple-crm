@@ -1,31 +1,38 @@
 <section class="main-box">
     <h1>Dashboard</h1>
 
-    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quos fuga vero pariatur iusto, voluptates nostrum
-        inventore tenetur ex minima mollitia deleniti et excepturi sapiente deserunt accusantium quo iure. Nesciunt,
-        quaerat!</p>
-    <p>Fuga culpa id expedita esse vero pariatur repellendus excepturi voluptatibus consequatur, dolorem alias ipsa non
-        aperiam aliquam nostrum earum officia modi, iste quibusdam error quisquam. Provident amet qui vitae dolor.</p>
-    <p>Consequatur exercitationem aspernatur dicta quos perspiciatis dolore minima repellendus, quam ad nihil voluptas
-        accusamus non beatae sed dolorem quidem id corporis? Molestiae eveniet itaque minus hic debitis id veniam
-        mollitia!</p>
-    <p>Labore maxime facere minima quis sequi fuga itaque maiores nesciunt cum. Accusantium laboriosam incidunt deserunt
-        labore deleniti sint maiores repudiandae et culpa! Commodi tempore exercitationem eius alias perspiciatis, odio
-        ducimus.</p>
-    <p>Deleniti debitis ratione vel commodi repellat, in quidem, architecto ducimus, sequi ad eveniet. Cumque laboriosam
-        provident quam deserunt officia, libero quisquam ad maiores maxime excepturi temporibus eos voluptatem saepe ea!
-    </p>
-    <p>Et beatae nobis quod velit delectus, itaque, odio fugit quaerat, eos recusandae facere. Quae, ea quidem! Et
-        maxime debitis perspiciatis ratione iste velit ad odit rerum. Repellendus ipsa explicabo iste.</p>
-    <p>Vero nobis quod consequuntur suscipit sed, deleniti similique. Mollitia veniam ipsum nobis atque magnam, at sint
-        nostrum beatae dolorum soluta aspernatur corrupti quas, cumque rerum deleniti eos reiciendis optio ab.</p>
-    <p>Perspiciatis ipsam quae repellat expedita incidunt debitis reprehenderit? Fuga, minus laudantium? Eaque earum
-        iusto minima ipsam ut, blanditiis a voluptate, impedit quidem ad maxime cum soluta. Officiis possimus voluptatem
-        deserunt!</p>
-    <p>In magnam, illum nam recusandae rem laborum veritatis voluptatibus quas amet magni. Rem, ex. Voluptate corrupti,
-        nostrum eligendi eius nihil, corporis necessitatibus molestiae esse tempore ipsum accusantium, ullam tenetur
-        dolores.</p>
-    <p>Adipisci quidem error possimus, mollitia inventore, laudantium accusamus voluptate esse est illum fuga dolorem.
-        Et commodi sapiente laboriosam aspernatur unde accusamus asperiores. Vel labore a maxime dolor, nemo ipsum
-        praesentium.</p>
+    <h2 *ngIf="formatTime(today | date: 'HH') < 12">Guten Morgen, es ist der {{today | date: 'dd.MM.yyyy - HH:mm'}} Uhr</h2>
+    <h2 *ngIf="formatTime(today | date: 'HH') >= 12">Guten Tag, es ist der {{today | date: 'dd.MM.yyyy - HH:mm'}} Uhr</h2>
+    <h2 *ngIf="formatTime(today | date: 'HH') >= 18">Guten Abend, es ist der {{today | date: 'dd.MM.yyyy - HH:mm'}} Uhr</h2>
+
+    <div class="flex-column">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Aufträge in Bearbeitung</mat-card-title>
+                <mat-card-subtitle>Liste aller Aufträge, die noch nicht bezahlt wurden.</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content class="flex-row margin-top">
+    
+                <div *ngFor="let task of fs.tasks | async | todo: '9'" (click)="navigateToTask(task.fid)" matTooltip="Zum Detailansicht">
+    
+                    <mat-card class="hover">
+                        <mat-card-header>
+                            <mat-card-title>#{{task.id}} Auftrag</mat-card-title>
+                            <mat-card-subtitle>{{writeStatus(task.status)}}</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content class="flex-column-nogap">
+                            <p>{{formatCustomer(task.unternehmen)}}</p>
+                            <span>Deadline:</span>
+                            <p>{{formatDate(task.deadline) | date: 'dd.MM.yyyy'}}</p>
+                        </mat-card-content>
+                    </mat-card>
+    
+                </div>
+    
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    
+
 </section>
