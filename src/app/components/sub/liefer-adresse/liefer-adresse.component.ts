@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { Timestamp, Unsubscribe } from '@angular/fire/firestore';
 import { Subscription, Unsubscribable } from 'rxjs';
 import { FirebaseService } from 'src/app/shared/services/firebase.service';
+import { EditAddressComponent } from '../../dialogs/edit-address/edit-address.component';
+import { MatDialog } from '@angular/material/dialog';
 
 interface Customer {
   id: number;
@@ -43,14 +45,17 @@ export class LieferAdresseComponent {
   unsub!: Promise<Unsubscribe>;
 
   @Input() kunde: Customer = {} as Customer;
-  
 
-  constructor(public fs: FirebaseService) { }
+
+  constructor(
+    public fs: FirebaseService,
+    private dialog: MatDialog
+  ) { }
 
   /**
    * Call data with listener and store in unsub.
    */
-  ngOnInit(): void {  
+  ngOnInit(): void {
     this.unsub = this.fs.getDeliveryAddress(this.kunde.fid);
   }
 
@@ -68,7 +73,13 @@ export class LieferAdresseComponent {
 
 
   openDialog() {
-    console.log('openDialog');
+    const dialogRef = this.dialog.open(EditAddressComponent, {
+      data: 'Lieferadresse',
+      height: 'fit-content',
+    });
+    const sub = dialogRef.afterClosed().subscribe(result => {
+
+    });
   }
 
 

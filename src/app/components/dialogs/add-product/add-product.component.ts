@@ -19,7 +19,7 @@ interface Produkt {
   styleUrls: ['./add-product.component.scss']
 })
 export class AddProductComponent {
-  windowWidth: number = 0;
+  windowWidth: number = window.innerWidth;
 
   id: number = 1;
   name: string = '';

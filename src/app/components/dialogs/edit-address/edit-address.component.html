@@ -1,0 +1,97 @@
+<h1 mat-dialog-title>Kunde editieren</h1>
+<div mat-dialog-content>
+
+    <p>Pflichtfelder: </p>
+
+    <div class="flex-column" *ngIf="windowWidth < 600">
+        <mat-form-field>
+            <mat-label>Vorname</mat-label>
+            <input matInput [(ngModel)]="vorname" required="">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Nachname</mat-label>
+            <input matInput [(ngModel)]="nachname" required="">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Unternehmen</mat-label>
+            <input matInput [(ngModel)]="unternehmen" required="">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Strasse</mat-label>
+            <input matInput [(ngModel)]="strasse" required="">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Plz</mat-label>
+            <input matInput [(ngModel)]="plz" maxlength="5" required="">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Ort</mat-label>
+            <input matInput [(ngModel)]="ort" required="">
+        </mat-form-field>
+    </div>
+
+    <div class="flex-column" *ngIf="windowWidth >= 600">
+
+        <div class="flex-row">
+            <mat-form-field>
+                <mat-label>Vorname</mat-label>
+                <input matInput [(ngModel)]="vorname" required="">
+            </mat-form-field>
+    
+            <mat-form-field>
+                <mat-label>Nachname</mat-label>
+                <input matInput [(ngModel)]="nachname" required="">
+            </mat-form-field>
+        </div>
+        
+        <div class="flex-row">
+            <mat-form-field>
+                <mat-label>Unternehmen</mat-label>
+                <input matInput [(ngModel)]="unternehmen" required="">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Strasse</mat-label>
+                <input matInput [(ngModel)]="strasse" required="">
+            </mat-form-field>
+        </div>
+        
+
+        <div class="flex-row">
+            <mat-form-field>
+                <mat-label>Plz</mat-label>
+                <input matInput [(ngModel)]="plz" maxlength="5" required="">
+            </mat-form-field>
+    
+            <mat-form-field>
+                <mat-label>Ort</mat-label>
+                <input matInput [(ngModel)]="ort" required="">
+            </mat-form-field>
+        </div>
+
+        
+    </div>
+
+
+    <p>Optional: </p>
+
+    <div class="flex-column">
+        <div class="flex-row">
+
+        <mat-form-field>
+            <mat-label>Anmerkungen</mat-label>
+            <input matInput [(ngModel)]="anmerkungen">
+        </mat-form-field>
+    </div>
+
+
+</div>
+<div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button (click)="updateAddress()" cdkFocusInitial>Update</button>
+</div>

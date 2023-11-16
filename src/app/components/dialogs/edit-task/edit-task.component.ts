@@ -28,7 +28,7 @@ interface Posten {
   styleUrls: ['./edit-task.component.scss']
 })
 export class EditTaskComponent implements AfterViewInit {
-  windowWidth: number = 0;
+  windowWidth: number = window.innerWidth;
 
   newTask: Task = {
     id: this.data.id,

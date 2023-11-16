@@ -1,6 +1,8 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Timestamp, Unsubscribe } from '@angular/fire/firestore';
 import { FirebaseService } from 'src/app/shared/services/firebase.service';
+import { EditAddressComponent } from '../../dialogs/edit-address/edit-address.component';
+import { MatDialog } from '@angular/material/dialog';
 
 interface Customer {
   id: number;
@@ -44,12 +46,15 @@ export class RechnungsAdresseComponent implements OnInit, OnDestroy {
   @Input() kunde: Customer = {} as Customer;
 
 
-  constructor(public fs: FirebaseService) { }
+  constructor(
+    public fs: FirebaseService,
+    private dialog: MatDialog
+  ) { }
 
   /**
    * Call data with listener and store in unsub.
    */
-  ngOnInit(): void {  
+  ngOnInit(): void {
     this.unsub = this.fs.getInvoiceAddress(this.kunde.fid);
   }
 
@@ -67,6 +72,12 @@ export class RechnungsAdresseComponent implements OnInit, OnDestroy {
 
 
   openDialog() {
-    console.log('openDialog');
+    const dialogRef = this.dialog.open(EditAddressComponent, {
+      data: 'Rechnungsadresse',
+      height: 'fit-content',
+    });
+    const sub = dialogRef.afterClosed().subscribe(result => {
+
+    });
   }
 }

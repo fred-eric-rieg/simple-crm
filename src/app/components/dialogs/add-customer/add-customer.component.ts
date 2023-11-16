@@ -25,7 +25,7 @@ interface Customer {
 })
 export class AddCustomerComponent {
 
-  windowWidth: number = 0;
+  windowWidth: number = window.innerWidth;
 
   vorname: string = '';
   nachname: string = '';

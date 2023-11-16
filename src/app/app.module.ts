@@ -52,6 +52,7 @@ import { StatusOrangeDirective } from './shared/directives/status-orange.directi
 import { StatusGreenDirective } from './shared/directives/status-green.directive';
 import { LieferAdresseComponent } from './components/sub/liefer-adresse/liefer-adresse.component';
 import { RechnungsAdresseComponent } from './components/sub/rechnungs-adresse/rechnungs-adresse.component';
+import { EditAddressComponent } from './components/dialogs/edit-address/edit-address.component';
 console.log('%cThis is the development environment.', 'color: orange; font-size: 18px; font-weight: bold;');
 
 
@@ -80,6 +81,7 @@ console.log('%cThis is the development environment.', 'color: orange; font-size:
     StatusGreenDirective,
     LieferAdresseComponent,
     RechnungsAdresseComponent,
+    EditAddressComponent,
   ],
   imports: [
     BrowserModule,

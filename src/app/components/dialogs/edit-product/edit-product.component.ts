@@ -19,7 +19,7 @@ interface Produkt {
   styleUrls: ['./edit-product.component.scss']
 })
 export class EditProductComponent {
-  windowWidth: number = 0;
+  windowWidth: number = window.innerWidth;
 
   id: number = this.data.id;
   name: string = this.data.name;
