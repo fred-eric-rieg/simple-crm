@@ -9,6 +9,7 @@ import { Timestamp } from '@angular/fire/firestore';
 import { AddTaskComponent } from '../../dialogs/add-task/add-task.component';
 
 interface Task {
+  title: string;
   id: number;
   fid: string;
   unternehmen: string;

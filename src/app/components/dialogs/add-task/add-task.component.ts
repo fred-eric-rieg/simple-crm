@@ -5,6 +5,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { FirebaseService } from 'src/app/shared/services/firebase.service';
 
 interface Task {
+  title: string;
   id: number;
   fid: string;
   unternehmen: string;
@@ -31,6 +32,7 @@ export class AddTaskComponent implements AfterViewInit {
   windowWidth: number = window.innerWidth;
 
   newTask: Task = {
+    title: '',
     id: 0,
     fid: '',
     unternehmen: '',
@@ -65,6 +67,7 @@ export class AddTaskComponent implements AfterViewInit {
 
   async createTask() {
     let task: any = {
+      title: this.newTask.title,
       id: 0,
       fid: '',
       posten: this.newTask.posten,

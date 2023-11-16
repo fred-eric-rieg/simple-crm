@@ -22,6 +22,7 @@ interface Customer {
 }
 
 interface Task {
+  title: string;
   id: number;
   fid: string;
   unternehmen: string;
@@ -245,6 +246,7 @@ export class FirebaseService implements OnDestroy {
     const db = getFirestore();
     const collectionRef = collection(db, 'auftraege');
     let docRef = await addDoc(collectionRef, {
+      title: task.title,
       id: task.id,
       unternehmen: task.unternehmen,
       anmerkungen: task.anmerkungen,
@@ -270,6 +272,7 @@ export class FirebaseService implements OnDestroy {
     const docRef = doc(db, 'auftraege', task.fid);
 
     await updateDoc(docRef, {
+      title: task.title,
       id: task.id,
       unternehmen: task.unternehmen,
       anmerkungen: task.anmerkungen,

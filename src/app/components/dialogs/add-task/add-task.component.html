@@ -14,6 +14,11 @@
         </mat-form-field>
 
         <mat-form-field>
+            <mat-label>Title</mat-label>
+            <input matInput [(ngModel)]="newTask.title">
+        </mat-form-field>
+
+        <mat-form-field>
             <mat-label>Deadline</mat-label>
             <input matInput [matDatepicker]="picker" required="" [(ngModel)]="newTask.deadline">
             <mat-hint>MM/DD/YYYY</mat-hint>

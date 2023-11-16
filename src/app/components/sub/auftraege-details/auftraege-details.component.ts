@@ -6,7 +6,25 @@ import { FirebaseService } from 'src/app/shared/services/firebase.service';
 import { EditTaskComponent } from '../../dialogs/edit-task/edit-task.component';
 import { jsPDF } from 'jspdf';
 
+
+interface Customer {
+  id: number;
+  fid: string;
+  vorname: string;
+  nachname: string;
+  unternehmen: string;
+  email: string;
+  telefon: string;
+  strasse: string;
+  plz: number;
+  ort: string;
+  anmerkungen: string;
+  erstellt: Timestamp;
+  geaendert: Timestamp;
+}
+
 interface Task {
+  title: string;
   id: number;
   fid: string;
   unternehmen: string;
@@ -78,12 +96,12 @@ export class AuftraegeDetailsComponent {
   }
 
 
-  formatStatus(status: string) {
+  makeNumber(status: string) {
     return Number(status);
   }
 
 
-  writeStatus(status: string) {
+  formatStatus(status: string) {
     if (status === '1') return 'Anfrage';
     if (status === '2') return 'Angebot verschickt';
     if (status === '3') return 'Angebot angenommen';
@@ -146,12 +164,29 @@ export class AuftraegeDetailsComponent {
   }
 
 
+  getCustomer(unternehmen: string) {
+    let name = "";
+    this.fs.customers.getValue()?.forEach(c => {
+      if (c.fid === unternehmen) {
+        name = c.vorname + " " + c.nachname;
+      }
+    });
+    return name;
+  }
+
+
+  calculateProgress(status: string) {
+    let num = Number(status);
+    return (num / 9) * 100;
+  }
+
+
   createPdf(task: Task) {
     const doc = new jsPDF();
     doc.setFontSize(20);
     doc.text("Rechnung", 10, 20);
     doc.setFontSize(10);
-    doc.text("Leistungserbringer GmbH, Musterstraße 1, 01234 Musterstadt", 10, 40);
+    doc.text("Leistungserbringer GmbH, Musterstraße 1, 01234 Musterstadt", 10, 35);
     doc.setFontSize(12);
     doc.text(this.formatCustomer(task.unternehmen), 10, 45);
     doc.text(this.getAddress(task).strasse, 10, 50);
@@ -166,18 +201,20 @@ export class AuftraegeDetailsComponent {
     doc.text("Rechnungsnummer: #2023-"+String(task.id), 10, 90);
 
     doc.setFontSize(12);
-    doc.text("Sehr geehrter Herr Schwanzus Longus,", 10, 110);
-    doc.text("gehen Sie nicht über Los, sondern zahlen Sie mir jetzt Geld!", 10, 130);
+    doc.text("Sehr geehrter Herr " + this.getCustomer(task.unternehmen) + ",", 10, 110);
+    doc.text("ich erlaube mir Ihnen die folgenden Posten in Rechnung zu stellen:", 10, 130);
 
 
     doc.setFontSize(16);
     doc.text("Posten", 10, 150);
+    doc.text("Menge", 80, 150);
     doc.text("Preis Netto", 120, 150);
     doc.text("Summe", 160, 150);
     doc.setFontSize(12);
     let y = 160;
     task.posten.forEach(p => {
-      doc.text(this.formatProduct(p.produkt) + " x " + p.anzahl , 10, y);
+      doc.text(this.formatProduct(p.produkt), 10, y);
+      doc.text(String(p.anzahl), 80, y);
       doc.text(String(this.getSum(p)) + " €", 120, y);
       y += 10;
     });
@@ -194,7 +231,7 @@ export class AuftraegeDetailsComponent {
     doc.text("Gesamt Brutto", 80, y);
     doc.text((Math.round((Number(this.getTotal(task.posten)) * 1.19) * 100) / 100).toFixed(2) + " €", 120, y);
     y += 20;
-    doc.text("Zahlungsziel: 14 Tage", 10, y);
+    doc.text("Bitte zahlen Sie innerhalb der nächsten 14 Werkstage", 10, y);
 
     doc.save("#"+String(task.id) + ".pdf");
   }

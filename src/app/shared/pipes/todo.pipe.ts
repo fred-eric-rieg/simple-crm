@@ -2,6 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Timestamp } from '@angular/fire/firestore';
 
 interface Task {
+  title: string;
   id: number;
   fid: string;
   unternehmen: string;

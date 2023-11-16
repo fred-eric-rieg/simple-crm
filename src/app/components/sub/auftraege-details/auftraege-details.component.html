@@ -6,42 +6,32 @@
 
     <div *ngFor="let task of fs.tasks | async">
 
-        <div *ngIf="task.fid == taskId" class="flex-row margin-bottom margin-top">
-            <div class="circle" matTooltip="Anfrage">
-                <div [class.done]="formatStatus(task.status) >= 1"></div>
-            </div>
-            <div class="circle" [class.current]="formatStatus(task.status) == 1" matTooltip="Angebot verschickt">
-                <div [class.done]="formatStatus(task.status) >= 2"></div>
-            </div>
-            <div class="circle" [class.current]="formatStatus(task.status) == 2" matTooltip="Angebot angenommen">
-                <div [class.done]="formatStatus(task.status) >= 3"></div>
-            </div>
-            <div class="circle" [class.current]="formatStatus(task.status) == 3" matTooltip="Lieferung abgeschickt">
-                <div [class.done]="formatStatus(task.status) >= 4"></div>
-            </div>
-            <div class="circle" [class.current]="formatStatus(task.status) == 4" matTooltip="Rechnung verschickt">
-                <div [class.done]="formatStatus(task.status) >= 5"></div>
-            </div>
-            <div class="circle" [class.current]="formatStatus(task.status) == 5" matTooltip="Zahlungserinnerung">
-                <div [class.done]="formatStatus(task.status) >= 6"></div>
-            </div>
-            <div class="circle" [class.current]="formatStatus(task.status) == 6" matTooltip="1. Mahnung">
-                <div [class.done]="formatStatus(task.status) >= 7"></div>
-            </div>
-            <div class="circle" [class.current]="formatStatus(task.status) == 7" matTooltip="2. Mahnung">
-                <div [class.done]="formatStatus(task.status) >= 8"></div>
-            </div>
-            <div class="circle" [class.current]="formatStatus(task.status) == 8" matTooltip="Bezahlung erhalten">
-                <div [class.done]="formatStatus(task.status) == 9"></div>
-            </div>
-        </div>
 
         <mat-card *ngIf="task.fid == taskId" class="padding">
 
-            <div class="flex-column">
-                <h2>#{{task.id}} Auftrag ({{writeStatus(task.status)}})</h2>
-                <span class="subtitle">{{formatCustomer(task.unternehmen)}}</span>
+            <div class="flex-row margin-bottom">
+                <mat-card-title>#{{task.id}} {{task.title}}</mat-card-title>
+                <mat-card-subtitle *ngIf="task.status == '1'"
+                    appStatusOrange>{{formatStatus(task.status)}}</mat-card-subtitle>
+                <mat-card-subtitle *ngIf="task.status == '2'"
+                    appStatusOrange>{{formatStatus(task.status)}}</mat-card-subtitle>
+                <mat-card-subtitle *ngIf="task.status == '3'"
+                    appStatusOrange>{{formatStatus(task.status)}}</mat-card-subtitle>
+                <mat-card-subtitle *ngIf="task.status == '4'"
+                    appStatusOrange>{{formatStatus(task.status)}}</mat-card-subtitle>
+                <mat-card-subtitle *ngIf="task.status == '5'"
+                    appStatusOrange>{{formatStatus(task.status)}}</mat-card-subtitle>
+                <mat-card-subtitle *ngIf="task.status == '6'"
+                    appStatusRed>{{formatStatus(task.status)}}</mat-card-subtitle>
+                <mat-card-subtitle *ngIf="task.status == '7'"
+                    appStatusRed>{{formatStatus(task.status)}}</mat-card-subtitle>
+                <mat-card-subtitle *ngIf="task.status == '8'"
+                    appStatusRed>{{formatStatus(task.status)}}</mat-card-subtitle>
+                <mat-card-subtitle *ngIf="task.status == '9'"
+                    appStatusGreen>{{formatStatus(task.status)}}</mat-card-subtitle>
             </div>
+
+            <span class="subtitle">{{formatCustomer(task.unternehmen)}}</span>
 
             <div class="flex-row">
                 <div class="flex-column">
@@ -59,7 +49,11 @@
                 <div class="flex-column">
                     <span class="subtitle">Anmerkungen</span>
                     <p>{{task.anmerkungen}}</p>
-                    <span>Deadline: {{formatDate(task.deadline) | date: 'dd.MM.yyyy'}}</span>
+                    <p>Deadline: {{formatDate(task.deadline) | date: 'dd.MM.yyyy'}}</p>
+                    <div class="progressbar-bg">
+                        <div class="progressbar-inner" [style.width]="calculateProgress(task.status) + '%'"></div>
+                    </div>
+                    <div><p>{{makeNumber(task.status)}}/9</p></div>
                     <span>Erstellt: {{formatDate(task.erstellt) | date: 'medium'}}</span>
                     <p>Geändert: {{formatDate(task.geaendert) | date: 'medium'}}</p>
                 </div>

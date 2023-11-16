@@ -5,6 +5,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FirebaseService } from 'src/app/shared/services/firebase.service';
 
 interface Task {
+  title: string;
   id: number;
   fid: string;
   unternehmen: string;
@@ -31,6 +32,7 @@ export class EditTaskComponent implements AfterViewInit {
   windowWidth: number = window.innerWidth;
 
   newTask: Task = {
+    title: this.data.title,
     id: this.data.id,
     fid: this.data.fid,
     unternehmen: this.data.unternehmen,
@@ -78,6 +80,7 @@ export class EditTaskComponent implements AfterViewInit {
   async updateTask() {
     if (this.isStatusGreen()) {
       let task: Task = {
+        title: this.newTask.title,
         id: this.newTask.id,
         fid: this.newTask.fid,
         unternehmen: this.newTask.unternehmen,
@@ -103,6 +106,7 @@ export class EditTaskComponent implements AfterViewInit {
 
 
   isStatusGreen() {
+    if (this.newTask.title === null) return false;
     if (this.newTask.id === null) return false;
     if (this.newTask.unternehmen === '') return false;
     if (this.newTask.anmerkungen === '') return false;
