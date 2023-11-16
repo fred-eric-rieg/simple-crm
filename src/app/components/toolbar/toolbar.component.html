@@ -1,8 +1,29 @@
 <mat-toolbar color="primary" class="example-toolbar">
-    <button mat-icon-button (click)="toggleSidenav()">
-        <mat-icon [class.hide]="snavservice.toggled">chevron_right</mat-icon>
-        <mat-icon [class.hide]="!snavservice.toggled">chevron_left</mat-icon>
+    <div class="flex-row-space">
+        <button mat-mini-fab color="accent" (click)="toggleSidenav()" matTooltip="Toggle sidenav">
+            <mat-icon [class.hide]="snavservice.toggled">chevron_right</mat-icon>
+            <mat-icon [class.hide]="!snavservice.toggled">chevron_left</mat-icon>
+        </button>
 
-    </button>
-    <h1>Simple CRM</h1>
+        <div class="flex-row margin-left menu">
+            <button mat-button (click)="open('/dashboard')">
+                <mat-icon>home</mat-icon> Dashboard
+            </button>
+            <button mat-button (click)="open('/kunden')">
+                <mat-icon>contact_mail</mat-icon> Kunden
+            </button>
+            <button mat-button (click)="open('/auftraege')">
+                <mat-icon>description</mat-icon> Aufträge
+            </button>
+            <button mat-button (click)="open('/produkte')">
+                <mat-icon>sell</mat-icon> Produkte
+            </button>
+        </div>
+
+        
+        <h1>Simple CRM</h1>
+    
+        
+    </div>
+    
 </mat-toolbar>

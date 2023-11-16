@@ -12,3 +12,30 @@ h1.example-app-name {
 .hide {
     display: none;
 }
+
+.flex-row-space {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.margin-left {
+    margin-left: 2rem;
+}
+
+.menu {
+    display: flex;
+}
+
+@media screen and (max-width: 700px) {
+    .menu {
+        display: none;
+    }
+}
