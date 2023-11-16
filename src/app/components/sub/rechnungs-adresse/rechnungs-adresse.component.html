@@ -1,0 +1,25 @@
+<mat-card class="padding" *ngFor="let address of fs.invoiceAddress | async">
+
+    <div class="flex-column">
+        <h2>Rechnungsadresse</h2>
+        <span>{{address.vorname}} {{address.nachname}}</span>
+        <p>{{address.strasse}}, {{address.plz}} {{address.ort}} </p>
+    </div>
+
+    <div class="flex-row">
+        <div class="flex-column">
+            <span class="subtitle">Anmerkungen</span>
+            <p>{{address.anmerkungen}}</p>
+            <span>Erstellt: {{formatDate(address.erstellt) | date: 'medium'}}</span>
+            <p>Geändert: {{formatDate(address.geaendert) | date: 'medium'}}</p>
+        </div>
+    </div>
+
+    <div class="flex-row">
+        <div class="flex-column">
+            <button mat-raised-button color="primary"
+                (click)="openDialog()"><mat-icon>edit</mat-icon>Bearbeiten</button>
+        </div>
+    </div>
+
+</mat-card>

@@ -49,6 +49,8 @@ import { DecimalPipe } from './shared/pipes/decimal.pipe';
 import { StatusRedDirective } from './shared/directives/status-red.directive';
 import { StatusOrangeDirective } from './shared/directives/status-orange.directive';
 import { StatusGreenDirective } from './shared/directives/status-green.directive';
+import { LieferAdresseComponent } from './components/sub/liefer-adresse/liefer-adresse.component';
+import { RechnungsAdresseComponent } from './components/sub/rechnungs-adresse/rechnungs-adresse.component';
 console.log('%cThis is the development environment.', 'color: orange; font-size: 18px; font-weight: bold;');
 
 
@@ -75,6 +77,8 @@ console.log('%cThis is the development environment.', 'color: orange; font-size:
     StatusRedDirective,
     StatusOrangeDirective,
     StatusGreenDirective,
+    LieferAdresseComponent,
+    RechnungsAdresseComponent,
   ],
   imports: [
     BrowserModule,

@@ -4,7 +4,7 @@
             [routerLink]="['/kunden']"><mat-icon>keyboard_backspace</mat-icon>back</button>
     </div>
 
-    <div *ngFor="let kunde of fs.customers | async">
+    <div *ngFor="let kunde of fs.customers | async" [class.flex-row]="windowWidth > 600" [class.flex-column]="windowWidth <= 600">
         <mat-card *ngIf="kunde.fid == customer" class="padding">
 
             <div class="flex-column">
@@ -39,7 +39,11 @@
             </div>
 
         </mat-card>
-    </div>
 
+        <app-liefer-adresse *ngIf="kunde.fid == customer" [kunde]="kunde"></app-liefer-adresse>
+
+        <app-rechnungs-adresse *ngIf="kunde.fid == customer" [kunde]="kunde"></app-rechnungs-adresse>
+
+    </div>
 
 </section>

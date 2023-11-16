@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy, inject } from '@angular/core';
 import { Unsubscribe } from '@angular/fire/auth';
-import { Firestore, onSnapshot, getFirestore, collection, query, Timestamp, addDoc, updateDoc, doc } from '@angular/fire/firestore';
+import { Firestore, onSnapshot, getFirestore, collection, query, Timestamp, addDoc, updateDoc, doc, where } from '@angular/fire/firestore';
 import { BehaviorSubject } from 'rxjs';
 
 let unsub!: Unsubscribe;
@@ -49,6 +49,19 @@ interface Produkt {
   geaendert: Timestamp;
 }
 
+
+interface Address {
+  kunde: string;
+  vorname: string;
+  nachname: string;
+  strasse: string;
+  plz: number;
+  ort: string;
+  anmerkungen: string;
+  erstellt: Timestamp;
+  geaendert: Timestamp;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -58,6 +71,8 @@ export class FirebaseService implements OnDestroy {
   customers: BehaviorSubject<Customer[] | null> = new BehaviorSubject<Customer[] | null>(null);
   tasks: BehaviorSubject<Task[] | null> = new BehaviorSubject<Task[] | null>(null);
   products: BehaviorSubject<Produkt[] | null> = new BehaviorSubject<Produkt[] | null>(null);
+  deliveryAddress: BehaviorSubject<Address[] | null> = new BehaviorSubject<Address[] | null>(null);
+  invoiceAddress: BehaviorSubject<Address[] | null> = new BehaviorSubject<Address[] | null>(null);
 
   constructor() { }
 
@@ -253,6 +268,53 @@ export class FirebaseService implements OnDestroy {
     });
 
     return true;
+  }
+
+
+  /**
+   * Returns the delivery address of a customer as snapshot with listener.
+   * @param fid as string
+   */
+  async getDeliveryAddress(fid: string): Promise<Unsubscribe> {
+    const db = getFirestore();
+    const q = query(collection(db, 'lieferadressen'), where('kunde', '==', fid));
+
+    let deliveryAddress: Address[] = [];
+
+    unsub = onSnapshot(q, (querySnapshot) => {
+
+      deliveryAddress.length = 0; // Clear array to prevent duplicates.
+
+      querySnapshot.forEach((doc) => {
+        deliveryAddress.push(doc.data() as Address);
+      });
+      this.deliveryAddress.next(deliveryAddress);
+    });
+
+    return unsub;
+  }
+
+  /**
+   * Returns the invoice address of a customer as snapshot with listener.
+   * @param fid as string
+   */
+  async getInvoiceAddress(fid: string): Promise<Unsubscribe> {
+    const db = getFirestore();
+    const q = query(collection(db, 'rechnungsadressen'), where('kunde', '==', fid));
+
+    let invoiceAddress: Address[] = [];
+
+    unsub = onSnapshot(q, (querySnapshot) => {
+
+      invoiceAddress.length = 0; // Clear array to prevent duplicates.
+
+      querySnapshot.forEach((doc) => {
+        invoiceAddress.push(doc.data() as Address);
+      });
+      this.invoiceAddress.next(invoiceAddress);
+    });
+
+    return unsub;
   }
 
 }
