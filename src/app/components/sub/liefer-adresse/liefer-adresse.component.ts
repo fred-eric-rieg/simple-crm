@@ -72,9 +72,9 @@ export class LieferAdresseComponent {
   }
 
 
-  openDialog() {
+  openDialog(address: Address) {
     const dialogRef = this.dialog.open(EditAddressComponent, {
-      data: 'Lieferadresse',
+      data: ['lieferadressen', address],
       height: 'fit-content',
     });
     const sub = dialogRef.afterClosed().subscribe(result => {

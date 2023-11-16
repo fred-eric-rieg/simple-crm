@@ -71,9 +71,9 @@ export class RechnungsAdresseComponent implements OnInit, OnDestroy {
   }
 
 
-  openDialog() {
+  openDialog(address: Address) {
     const dialogRef = this.dialog.open(EditAddressComponent, {
-      data: 'Rechnungsadresse',
+      data: ['rechnungsadressen', address],
       height: 'fit-content',
     });
     const sub = dialogRef.afterClosed().subscribe(result => {

@@ -180,6 +180,25 @@ export class FirebaseService implements OnDestroy {
   }
 
 
+  async updateAddress(address: Address, collection:string) {
+    const db = getFirestore();
+    const docRef = doc(db, collection, address.fid);
+
+    await updateDoc(docRef, {
+      vorname: address.vorname,
+      nachname: address.nachname,
+      unternehmen: address.unternehmen,
+      strasse: address.strasse,
+      plz: address.plz,
+      ort: address.ort,
+      anmerkungen: address.anmerkungen,
+      geaendert: Timestamp.fromDate(new Date())
+    });
+
+    return true;
+  }
+
+
   async updateCustomer(customer: any) {
     const db = getFirestore();
     const docRef = doc(db, 'kunden', customer.fid);
