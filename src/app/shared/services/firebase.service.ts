@@ -51,6 +51,7 @@ interface Produkt {
 
 
 interface Address {
+  fid: string;
   kunde: string;
   vorname: string;
   nachname: string;
@@ -125,6 +126,54 @@ export class FirebaseService implements OnDestroy {
 
     await updateDoc(doc(db, 'kunden', docId), {
       fid: docId
+    });
+
+    await this.createAddresses(customer, docId);
+
+    return true;
+  }
+
+
+  async createAddresses(customer: any, docId: string) {
+    const db = getFirestore();
+    const collectionRef = collection(db, 'lieferadressen');
+    let docRef = await addDoc(collectionRef, {
+      kunde: docId,
+      vorname: customer.vorname,
+      nachname: customer.nachname,
+      unternehmen: customer.unternehmen,
+      strasse: customer.strasse,
+      plz: customer.plz,
+      ort: customer.ort,
+      anmerkungen: customer.anmerkungen,
+      erstellt: Timestamp.fromDate(new Date()),
+      geaendert: Timestamp.fromDate(new Date())
+    });
+
+    const docIdLiefer = docRef.id;
+
+    await updateDoc(doc(db, 'lieferadressen', docIdLiefer), {
+      fid: docIdLiefer
+    });
+
+    const collectionRef2 = collection(db, 'rechnungsadressen');
+    let docRef2 = await addDoc(collectionRef2, {
+      kunde: docId,
+      vorname: customer.vorname,
+      nachname: customer.nachname,
+      unternehmen: customer.unternehmen,
+      strasse: customer.strasse,
+      plz: customer.plz,
+      ort: customer.ort,
+      anmerkungen: customer.anmerkungen,
+      erstellt: Timestamp.fromDate(new Date()),
+      geaendert: Timestamp.fromDate(new Date())
+    });
+
+    const docIdRechnung = docRef2.id;
+
+    await updateDoc(doc(db, 'rechnungsadressen', docIdRechnung), {
+      fid: docIdRechnung
     });
 
     return true;

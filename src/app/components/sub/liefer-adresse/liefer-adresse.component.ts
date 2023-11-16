@@ -20,6 +20,7 @@ interface Customer {
 }
 
 interface Address {
+  fid: string;
   kunde: string;
   vorname: string;
   nachname: string;
