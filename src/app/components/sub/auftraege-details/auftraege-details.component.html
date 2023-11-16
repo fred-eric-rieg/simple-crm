@@ -7,8 +7,8 @@
     <div *ngFor="let task of fs.tasks | async">
 
         <div *ngIf="task.fid == taskId" class="flex-row margin-bottom margin-top">
-            <div class="circle" [class.current]="formatStatus(task.status) == 1" matTooltip="Anfrage">
-                <div [class.done]="formatStatus(task.status) > 1"></div>
+            <div class="circle" matTooltip="Anfrage">
+                <div [class.done]="formatStatus(task.status) >= 1"></div>
             </div>
             <div class="circle" [class.current]="formatStatus(task.status) == 1" matTooltip="Angebot verschickt">
                 <div [class.done]="formatStatus(task.status) >= 2"></div>
