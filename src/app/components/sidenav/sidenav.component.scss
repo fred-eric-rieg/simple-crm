@@ -36,6 +36,19 @@
     font-size: 1.5rem;
 }
 
+.bold {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+
+}
+
 @media screen and (max-width: 600px) {
     .container {
         top: 56px;

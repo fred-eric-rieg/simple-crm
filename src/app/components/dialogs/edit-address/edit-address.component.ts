@@ -71,8 +71,6 @@ export class EditAddressComponent {
       erstellt: this.data[1].erstellt,
       geaendert: Timestamp.fromDate(new Date())
     }
-    console.log(address);
-    console.log(this.data[0]);
     let res = await this.fs.updateAddress(address, this.data[0]);
     if (res) this.dialogRef.close();
     else console.log('Fehler beim Speichern!');
