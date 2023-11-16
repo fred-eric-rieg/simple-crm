@@ -2,7 +2,7 @@
     <h1>Dashboard</h1>
 
     <h2 *ngIf="formatTime(today | date: 'HH') < 12">Guten Morgen, es ist der {{today | date: 'dd.MM.yyyy - HH:mm'}} Uhr</h2>
-    <h2 *ngIf="formatTime(today | date: 'HH') >= 12">Guten Tag, es ist der {{today | date: 'dd.MM.yyyy - HH:mm'}} Uhr</h2>
+    <h2 *ngIf="formatTime(today | date: 'HH') >= 12 && formatTime(today | date: 'HH') < 18">Guten Tag, es ist der {{today | date: 'dd.MM.yyyy - HH:mm'}} Uhr</h2>
     <h2 *ngIf="formatTime(today | date: 'HH') >= 18">Guten Abend, es ist der {{today | date: 'dd.MM.yyyy - HH:mm'}} Uhr</h2>
 
     <div class="flex-column">
