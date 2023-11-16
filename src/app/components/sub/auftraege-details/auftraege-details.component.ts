@@ -78,6 +78,24 @@ export class AuftraegeDetailsComponent {
   }
 
 
+  formatStatus(status: string) {
+    return Number(status);
+  }
+
+
+  writeStatus(status: string) {
+    if (status === '1') return 'Anfrage';
+    if (status === '2') return 'Angebot verschickt';
+    if (status === '3') return 'Angebot angenommen';
+    if (status === '4') return 'Lieferung abgeschickt';
+    if (status === '5') return 'Rechung verschickt';
+    if (status === '6') return 'Zahlungserinnerung';
+    if (status === '7') return '1. Mahnung';
+    if (status === '8') return '2. Mahnung';
+    if (status === '9') return 'Bezahlung erhalten';
+    return 'Unbekannt';
+  }
+
   getSum(posten: Posten) {
     let preis = 0;
     this.fs.products.getValue()?.forEach(p => {

@@ -11,6 +11,7 @@
     display: flex;
     flex-direction: row;
     gap: 2rem;
+    flex-wrap: wrap;
 }
 
 .flex-column {
@@ -53,4 +54,47 @@
 
 .margin-top {
     margin-top: 1rem;
+}
+
+.margin-bottom {
+    margin-bottom: 1rem;
+}
+
+.circle {
+    transition: all 125ms ease-in-out;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    border: 4px solid #3f51b5;
+    user-select: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.circle:hover {
+    transition: all 125ms ease-in-out;
+    scale: 1.1;
+}
+
+.done {
+    transition: all 125ms ease-in-out;
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    background-color: #3f51b5;
+}
+
+.todo {
+    transition: all 125ms ease-in-out;
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    background-color: #ff4081;
+}
+
+.current {
+    border: 4px solid #ff4081;
 }

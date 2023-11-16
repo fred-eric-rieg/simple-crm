@@ -45,17 +45,32 @@
         <mat-form-field>
             <mat-label>Status</mat-label>
             <mat-select required="" [(value)]="newTask.status">
-                <mat-option value="in Bearbeitung">
-                    in Bearbeitung
+                <mat-option value="1">
+                    Anfrage
                 </mat-option>
-                <mat-option value="Rechnung verschickt">
+                <mat-option value="2">
+                    Angebot verschickt
+                </mat-option>
+                <mat-option value="3">
+                    Angebot angenommen
+                </mat-option>
+                <mat-option value="4">
+                    Lieferung abgeschickt
+                </mat-option>
+                <mat-option value="5">
                     Rechnung verschickt
                 </mat-option>
-                <mat-option value="versandt">
-                    versandt
+                <mat-option value="6">
+                    Zahlungserinnerung
                 </mat-option>
-                <mat-option value="bezahlt">
-                    bezahlt
+                <mat-option value="7">
+                    1. Mahnung
+                </mat-option>
+                <mat-option value="8">
+                    2. Mahnung
+                </mat-option>
+                <mat-option value="9">
+                    Bezahlung erhalten
                 </mat-option>
             </mat-select>
         </mat-form-field>

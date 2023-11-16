@@ -60,9 +60,15 @@
             <ng-container matColumnDef="status">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
                 <td mat-cell *matCellDef="let row" (click)="selectTask(row.fid)">
-                    <span *ngIf="row.status == 'in Bearbeitung'" appStatusRed>{{row.status}}</span>
-                    <span *ngIf="row.status != 'in Bearbeitung' && row.status != 'bezahlt'" appStatusOrange>{{row.status}}</span>
-                    <span *ngIf="row.status == 'bezahlt'" appStatusGreen>{{row.status}}</span>
+                    <span *ngIf="row.status == '1'" appStatusOrange>{{formatStatus(row.status)}}</span>
+                    <span *ngIf="row.status == '2'" appStatusOrange>{{formatStatus(row.status)}}</span>
+                    <span *ngIf="row.status == '3'" appStatusOrange>{{formatStatus(row.status)}}</span>
+                    <span *ngIf="row.status == '4'" appStatusOrange>{{formatStatus(row.status)}}</span>
+                    <span *ngIf="row.status == '5'" appStatusOrange>{{formatStatus(row.status)}}</span>
+                    <span *ngIf="row.status == '6'" appStatusRed>{{formatStatus(row.status)}}</span>
+                    <span *ngIf="row.status == '7'" appStatusRed>{{formatStatus(row.status)}}</span>
+                    <span *ngIf="row.status == '8'" appStatusRed>{{formatStatus(row.status)}}</span>
+                    <span *ngIf="row.status == '9'" appStatusGreen>{{formatStatus(row.status)}}</span>
                 </td>
             </ng-container>
 
