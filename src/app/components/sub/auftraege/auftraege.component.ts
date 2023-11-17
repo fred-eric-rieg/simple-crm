@@ -35,7 +35,7 @@ export class AuftraegeComponent implements AfterViewInit {
 
   searchTerm: string = '';
 
-  displayedColumns: string[] = ['id', 'erstellt', 'deadline', 'unternehmen', 'anmerkungen', 'wert', 'posten', 'status'];
+  displayedColumns: string[] = ['id', 'erstellt', 'deadline', 'title', 'unternehmen', 'anmerkungen', 'wert', 'posten', 'status'];
 
   dataSource = new MatTableDataSource<Task>;
 

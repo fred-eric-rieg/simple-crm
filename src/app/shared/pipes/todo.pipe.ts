@@ -21,17 +21,18 @@ interface Posten {
 }
 
 @Pipe({
-  name: 'todo'
+  name: 'todo',
+  pure: false
 })
 export class TodoPipe implements PipeTransform {
 
-  transform(value: Task[] | null, ...args: string[]): Task[] | null {
+  transform(value: Task[] | null, ...args: number[]): Task[] | null {
     if (value) {
 
       let result: Task[] = [];
 
       value.forEach((task: Task) => {
-        if (task.status != '9') {
+        if (task.status == args[0].toString()) {
           result.push(task);
         }
       });

@@ -31,6 +31,13 @@
                 <td mat-cell *matCellDef="let row" (click)="selectTask(row.fid)"> {{formatDate(row.erstellt)}} </td>
             </ng-container>
 
+            <!-- Title Column -->
+            <ng-container matColumnDef="title">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
+                <td mat-cell *matCellDef="let row" (click)="selectTask(row.fid)"> {{row.title}}
+                </td>
+            </ng-container>
+
             <!-- Unternehmen Column -->
             <ng-container matColumnDef="unternehmen">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Unternehmen </th>

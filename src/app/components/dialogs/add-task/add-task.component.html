@@ -38,7 +38,7 @@
         <div *ngFor="let posten of newTask.posten; let i = index">
             <div class="flex-row-space">
                 <div class="short">
-                    <span>{{ getProduct(posten.produkt) }}</span>
+                    <span matTooltip="{{getProduct(posten.produkt)}}">{{ getProduct(posten.produkt) }}</span>
                 </div>
                 <div class="flex-row-gap">
                     <input type="number" min="1" class="mini-input" [(ngModel)]="posten.anzahl">

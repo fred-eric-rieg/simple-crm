@@ -1,37 +1,68 @@
 <section class="main-box">
     <h1>Dashboard</h1>
 
-    <div class="flex-column">
+    <div>
         <mat-card>
             <mat-card-header>
                 <mat-card-title>Aufträge in Bearbeitung</mat-card-title>
-                <mat-card-subtitle>Liste aller Aufträge, die noch nicht bezahlt wurden.</mat-card-subtitle>
+                <mat-card-subtitle>Liste aller Aufträge unterteilt in 9 Arbeitsschritte</mat-card-subtitle>
             </mat-card-header>
-            <mat-card-content class="flex-row margin-top">
+            <mat-card-content class="flex-row margin-top scroll">
 
-                <div *ngFor="let task of fs.tasks | async | todo: '9'" (click)="navigateToTask(task.fid)"
-                    matTooltip="Zur Detailansicht">
 
-                    <mat-card class="hover">
-                        <mat-card-header>
-                            <mat-card-title>#{{task.id}} {{task.title}}</mat-card-title>
-                            <mat-card-subtitle *ngIf="task.status == '1'" appStatusOrange>{{formatStatus(task.status)}}</mat-card-subtitle>
-                            <mat-card-subtitle *ngIf="task.status == '2'" appStatusOrange>{{formatStatus(task.status)}}</mat-card-subtitle>
-                            <mat-card-subtitle *ngIf="task.status == '3'" appStatusOrange>{{formatStatus(task.status)}}</mat-card-subtitle>
-                            <mat-card-subtitle *ngIf="task.status == '4'" appStatusOrange>{{formatStatus(task.status)}}</mat-card-subtitle>
-                            <mat-card-subtitle *ngIf="task.status == '5'" appStatusOrange>{{formatStatus(task.status)}}</mat-card-subtitle>
-                            <mat-card-subtitle *ngIf="task.status == '6'" appStatusRed>{{formatStatus(task.status)}}</mat-card-subtitle>
-                            <mat-card-subtitle *ngIf="task.status == '7'" appStatusRed>{{formatStatus(task.status)}}</mat-card-subtitle>
-                            <mat-card-subtitle *ngIf="task.status == '8'" appStatusRed>{{formatStatus(task.status)}}</mat-card-subtitle>
-                            <mat-card-subtitle *ngIf="task.status == '9'" appStatusGreen>{{formatStatus(task.status)}}</mat-card-subtitle>
-                        </mat-card-header>
-                        <mat-card-content class="flex-column-nogap">
-                            <p>{{formatCustomer(task.unternehmen)}}</p>
-                            <span>Deadline:</span>
-                            <p>{{formatDate(task.deadline) | date: 'dd.MM.yyyy'}}</p>
-                        </mat-card-content>
-                    </mat-card>
+                <div *ngFor="let option of statusOptions; index as i" class="flex-column">
+                    <h3>{{option}}</h3>
 
+                    <div class="column" (drop)="drop((i+1).toString())" (dragover)="dragOver($event)">
+                        <div *ngFor="let task of fs.tasks | async | todo: (i + 1)" (click)="navigateToTask(task.fid)" draggable="true" (dragstart)="dragStart(task)">
+
+                            <mat-card class="hover">
+                                <mat-card-header>
+                                    <mat-card-title>#{{task.id}} {{task.title}}</mat-card-title>
+
+                                    <!-- Contextmenu to change status of task -->
+                                    <mat-menu #menu="matMenu">
+                                        <button mat-menu-item *ngFor="let option of statusOptions; index as i" (click)="changeStatus(task, (i + 1).toString())">{{option}}</button>
+                                    </mat-menu>
+
+                                    <mat-card-subtitle (click)="noBubble($event)" [matMenuTriggerFor]="menu"
+                                        *ngIf="task.status == '1'" class="scale"
+                                        appStatusOrange>{{formatStatus(task.status)}}</mat-card-subtitle>
+                                    <mat-card-subtitle (click)="noBubble($event)" [matMenuTriggerFor]="menu"
+                                        *ngIf="task.status == '2'" class="scale"
+                                        appStatusOrange>{{formatStatus(task.status)}}</mat-card-subtitle>
+                                    <mat-card-subtitle (click)="noBubble($event)" [matMenuTriggerFor]="menu"
+                                        *ngIf="task.status == '3'" class="scale"
+                                        appStatusOrange>{{formatStatus(task.status)}}</mat-card-subtitle>
+                                    <mat-card-subtitle (click)="noBubble($event)" [matMenuTriggerFor]="menu"
+                                        *ngIf="task.status == '4'" class="scale"
+                                        appStatusOrange>{{formatStatus(task.status)}}</mat-card-subtitle>
+                                    <mat-card-subtitle (click)="noBubble($event)" [matMenuTriggerFor]="menu"
+                                        *ngIf="task.status == '5'" class="scale"
+                                        appStatusOrange>{{formatStatus(task.status)}}</mat-card-subtitle>
+                                    <mat-card-subtitle (click)="noBubble($event)" [matMenuTriggerFor]="menu"
+                                        *ngIf="task.status == '6'" class="scale"
+                                        appStatusRed>{{formatStatus(task.status)}}</mat-card-subtitle>
+                                    <mat-card-subtitle (click)="noBubble($event)" [matMenuTriggerFor]="menu"
+                                        *ngIf="task.status == '7'" class="scale"
+                                        appStatusRed>{{formatStatus(task.status)}}</mat-card-subtitle>
+                                    <mat-card-subtitle (click)="noBubble($event)" [matMenuTriggerFor]="menu"
+                                        *ngIf="task.status == '8'" class="scale"
+                                        appStatusRed>{{formatStatus(task.status)}}</mat-card-subtitle>
+                                    <mat-card-subtitle (click)="noBubble($event)" [matMenuTriggerFor]="menu"
+                                        *ngIf="task.status == '9'" class="scale"
+                                        appStatusGreen>{{formatStatus(task.status)}}</mat-card-subtitle>
+                                </mat-card-header>
+                                <mat-card-content class="flex-column-nogap">
+                                    <p>{{formatCustomer(task.unternehmen)}}</p>
+                                    <span>Deadline:</span>
+                                    <p>{{formatDate(task.deadline) | date: 'dd.MM.yyyy'}}</p>
+                                </mat-card-content>
+                            </mat-card>
+
+                        </div>
+
+                    </div>
                 </div>
 
             </mat-card-content>

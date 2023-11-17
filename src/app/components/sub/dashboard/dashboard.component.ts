@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Renderer2 } from '@angular/core';
 import { Timestamp } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { FirebaseService } from 'src/app/shared/services/firebase.service';
@@ -31,9 +31,29 @@ export class DashboardComponent {
 
   today: Date = new Date();
 
+  statusOptions =[
+    'Anfrage', 'Angebot verschickt', 'Angebot angenommen', 'Lieferung abgeschickt', 'Rechnung verschickt', 'Zahlungserinnerung', '1. Mahnung', '2. Mahnung', 'Bezahlung erhalten'
+  ]
+
+
+  newTask: Task = {
+    title: '',
+    id: 0,
+    fid: '',
+    unternehmen: '',
+    anmerkungen: '',
+    erstellt: 0,
+    geaendert: 0,
+    deadline: 0,
+    wert: 0,
+    posten: [],
+    status: '1'
+  };
+
   constructor(
     public fs: FirebaseService,
-    private router: Router) {
+    private router: Router,
+    private renderer: Renderer2) {
     setInterval(() => {
       this.today = new Date();
     }, 60000);
@@ -96,5 +116,31 @@ export class DashboardComponent {
     return 'Unbekannt';
   }
 
+
+  noBubble(e: any) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+
+
+  changeStatus(task: any, status: string) {
+    console.log(task);
+    task.status = status;
+    this.fs.updateTask(task);
+  }
+
+  drop(option: any) {
+    this.newTask.status = option;
+    this.fs.updateTask(this.newTask);
+  }
+
+  dragStart(task: any) {
+    this.newTask = task;
+  }
+  
+
+  dragOver(e: any) {
+    e.preventDefault();
+  }
 
 }
