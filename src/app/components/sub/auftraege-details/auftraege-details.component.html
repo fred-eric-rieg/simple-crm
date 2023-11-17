@@ -79,7 +79,13 @@
         <div class="flex-column-simple" *ngFor="let task of fs.tasks | async">
             <div class="flex-column margin-left" *ngIf="task.fid == taskId">
 
-                <app-rechnung-erstellen [task]="task"></app-rechnung-erstellen>
+                <app-rechnung-erstellen [task]="task" class="margin-bottom"></app-rechnung-erstellen>
+
+                <app-zahlungserinnerung [task]="task" class="margin-bottom"></app-zahlungserinnerung>
+
+                <app-mahnung1 [task]="task" class="margin-bottom"></app-mahnung1>
+
+                <app-mahnung2 [task]="task"></app-mahnung2>
 
             </div>
         </div>

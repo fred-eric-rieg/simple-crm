@@ -57,6 +57,9 @@ import { EditAddressComponent } from './components/dialogs/edit-address/edit-add
 import { TodoPipe } from './shared/pipes/todo.pipe';
 import { BtnSidenavDirective } from './shared/directives/btn-sidenav.directive';
 import { RechnungErstellenComponent } from './components/sub/rechnung-erstellen/rechnung-erstellen.component';
+import { ZahlungserinnerungComponent } from './components/sub/zahlungserinnerung/zahlungserinnerung.component';
+import { Mahnung1Component } from './components/sub/mahnung1/mahnung1.component';
+import { Mahnung2Component } from './components/sub/mahnung2/mahnung2.component';
 console.log('%cThis is the development environment.', 'color: orange; font-size: 18px; font-weight: bold;');
 
 
@@ -89,6 +92,9 @@ console.log('%cThis is the development environment.', 'color: orange; font-size:
     EditAddressComponent,
     TodoPipe,
     RechnungErstellenComponent,
+    ZahlungserinnerungComponent,
+    Mahnung1Component,
+    Mahnung2Component,
   ],
   imports: [
     BrowserModule,
