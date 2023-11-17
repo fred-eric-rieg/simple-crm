@@ -4,7 +4,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FirebaseService } from 'src/app/shared/services/firebase.service';
 import { EditTaskComponent } from '../../dialogs/edit-task/edit-task.component';
-import { jsPDF } from 'jspdf';
 
 
 interface Customer {
@@ -47,6 +46,20 @@ interface Produkt {
   name: string;
   beschreibung: string;
   preis: number;
+  erstellt: Timestamp;
+  geaendert: Timestamp;
+}
+
+interface Address {
+  fid: string;
+  kunde: string;
+  vorname: string;
+  nachname: string;
+  unternehmen: string;
+  strasse: string;
+  plz: number;
+  ort: string;
+  anmerkungen: string;
   erstellt: Timestamp;
   geaendert: Timestamp;
 }
@@ -181,58 +194,7 @@ export class AuftraegeDetailsComponent {
   }
 
 
-  createPdf(task: Task) {
-    const doc = new jsPDF();
-    doc.setFontSize(20);
-    doc.text("Rechnung", 10, 20);
-    doc.setFontSize(10);
-    doc.text("Leistungserbringer GmbH, Musterstraße 1, 01234 Musterstadt", 10, 35);
-    doc.setFontSize(12);
-    doc.text(this.formatCustomer(task.unternehmen), 10, 45);
-    doc.text(this.getAddress(task).strasse, 10, 50);
-    doc.text(this.getAddress(task).plz + ", " + this.getAddress(task).ort, 10, 55) ;
+  changeInvoiceAddress(task: Task) {
 
-    doc.setFontSize(16);
-    // place infos right
-    doc.text("Rechnungsdatum: " + (new Date()).toLocaleString('de-DE', {day: '2-digit', month: '2-digit', year: 'numeric'}), 120, 60);
-    doc.text("Lieferdatum: " + (new Date()).toLocaleString('de-DE', {day: '2-digit', month: '2-digit', year: 'numeric'}), 120, 70);
-    doc.text("Ust.IdNr: 12123123123", 120, 80);
-
-    doc.text("Rechnungsnummer: #2023-"+String(task.id), 10, 90);
-
-    doc.setFontSize(12);
-    doc.text("Sehr geehrter Herr " + this.getCustomer(task.unternehmen) + ",", 10, 110);
-    doc.text("ich erlaube mir Ihnen die folgenden Posten in Rechnung zu stellen:", 10, 130);
-
-
-    doc.setFontSize(16);
-    doc.text("Posten", 10, 150);
-    doc.text("Menge", 80, 150);
-    doc.text("Preis Netto", 120, 150);
-    doc.text("Summe", 160, 150);
-    doc.setFontSize(12);
-    let y = 160;
-    task.posten.forEach(p => {
-      doc.text(this.formatProduct(p.produkt), 10, y);
-      doc.text(String(p.anzahl), 80, y);
-      doc.text(String(this.getSum(p)) + " €", 120, y);
-      y += 10;
-    });
-    doc.setFontSize(16);
-    doc.text("Gesamt Netto", 80, y);
-    doc.text(String(this.getTotal(task.posten)) + " €", 120, y);
-    doc.setFontSize(12);
-    doc.text(this.getTotal(task.posten) + " €", 160, 160);
-    y += 10;
-    doc.text("zzgl. 19% USt.", 80, y);
-    doc.text((Math.round((Number(this.getTotal(task.posten)) * 0.19) * 100) / 100).toFixed(2) + " €" , 120, y);
-    y += 10;
-    doc.setFontSize(16);
-    doc.text("Gesamt Brutto", 80, y);
-    doc.text((Math.round((Number(this.getTotal(task.posten)) * 1.19) * 100) / 100).toFixed(2) + " €", 120, y);
-    y += 20;
-    doc.text("Bitte zahlen Sie innerhalb der nächsten 14 Werkstage", 10, y);
-
-    doc.save("#"+String(task.id) + ".pdf");
   }
 }

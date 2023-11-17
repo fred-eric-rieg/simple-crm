@@ -1,0 +1,19 @@
+<div class="flex-column">
+    <mat-form-field>
+        <mat-label>Zieladresse</mat-label>
+        <mat-select [(ngModel)]="target" (selectionChange)="requestAddress()">
+            <mat-option value="Standardadresse">
+                Standardadresse
+            </mat-option>
+            <mat-option value="Lieferadresse">
+                Lieferadresse
+            </mat-option>
+            <mat-option value="Rechnungsadresse">
+                Rechnungsadresse
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="createPdf(task)"><mat-icon>picture_as_pdf</mat-icon>Rechnung
+        erstellen</button>
+</div>

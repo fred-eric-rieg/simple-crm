@@ -4,76 +4,85 @@
             [routerLink]="['/auftraege']"><mat-icon>keyboard_backspace</mat-icon>Alle Aufträge</button>
     </div>
 
-    <div *ngFor="let task of fs.tasks | async">
+    <div class="flex-row-simple">
+
+        <div *ngFor="let task of fs.tasks | async">
 
 
-        <mat-card *ngIf="task.fid == taskId" class="padding">
+            <mat-card *ngIf="task.fid == taskId" class="padding">
 
-            <div class="flex-row margin-bottom">
-                <mat-card-title>#{{task.id}} {{task.title}}</mat-card-title>
-                <mat-card-subtitle *ngIf="task.status == '1'"
-                    appStatusOrange>{{formatStatus(task.status)}}</mat-card-subtitle>
-                <mat-card-subtitle *ngIf="task.status == '2'"
-                    appStatusOrange>{{formatStatus(task.status)}}</mat-card-subtitle>
-                <mat-card-subtitle *ngIf="task.status == '3'"
-                    appStatusOrange>{{formatStatus(task.status)}}</mat-card-subtitle>
-                <mat-card-subtitle *ngIf="task.status == '4'"
-                    appStatusOrange>{{formatStatus(task.status)}}</mat-card-subtitle>
-                <mat-card-subtitle *ngIf="task.status == '5'"
-                    appStatusOrange>{{formatStatus(task.status)}}</mat-card-subtitle>
-                <mat-card-subtitle *ngIf="task.status == '6'"
-                    appStatusRed>{{formatStatus(task.status)}}</mat-card-subtitle>
-                <mat-card-subtitle *ngIf="task.status == '7'"
-                    appStatusRed>{{formatStatus(task.status)}}</mat-card-subtitle>
-                <mat-card-subtitle *ngIf="task.status == '8'"
-                    appStatusRed>{{formatStatus(task.status)}}</mat-card-subtitle>
-                <mat-card-subtitle *ngIf="task.status == '9'"
-                    appStatusGreen>{{formatStatus(task.status)}}</mat-card-subtitle>
-            </div>
+                <div class="flex-row margin-bottom">
+                    <mat-card-title>#{{task.id}} {{task.title}}</mat-card-title>
+                    <mat-card-subtitle *ngIf="task.status == '1'"
+                        appStatusOrange>{{formatStatus(task.status)}}</mat-card-subtitle>
+                    <mat-card-subtitle *ngIf="task.status == '2'"
+                        appStatusOrange>{{formatStatus(task.status)}}</mat-card-subtitle>
+                    <mat-card-subtitle *ngIf="task.status == '3'"
+                        appStatusOrange>{{formatStatus(task.status)}}</mat-card-subtitle>
+                    <mat-card-subtitle *ngIf="task.status == '4'"
+                        appStatusOrange>{{formatStatus(task.status)}}</mat-card-subtitle>
+                    <mat-card-subtitle *ngIf="task.status == '5'"
+                        appStatusOrange>{{formatStatus(task.status)}}</mat-card-subtitle>
+                    <mat-card-subtitle *ngIf="task.status == '6'"
+                        appStatusRed>{{formatStatus(task.status)}}</mat-card-subtitle>
+                    <mat-card-subtitle *ngIf="task.status == '7'"
+                        appStatusRed>{{formatStatus(task.status)}}</mat-card-subtitle>
+                    <mat-card-subtitle *ngIf="task.status == '8'"
+                        appStatusRed>{{formatStatus(task.status)}}</mat-card-subtitle>
+                    <mat-card-subtitle *ngIf="task.status == '9'"
+                        appStatusGreen>{{formatStatus(task.status)}}</mat-card-subtitle>
+                </div>
 
-            <span class="subtitle">{{formatCustomer(task.unternehmen)}}</span>
+                <span class="subtitle">{{formatCustomer(task.unternehmen)}}</span>
 
-            <div class="flex-row">
-                <div class="flex-column">
-                    <span class="subtitle">Posten </span>
-                    <div class="flex-row-space" *ngFor="let posten of task.posten; index as i">
-                        <div class="width-fit align-left">{{formatProduct(posten.produkt)}} x {{posten.anzahl}} = </div>
-                        <div class="width-fit align-right">{{getSum(posten)}} €</div>
+                <div class="flex-row">
+
+                    <div class="flex-column">
+                        <span class="subtitle">Posten</span>
+                        <div class="flex-row-space" *ngFor="let posten of task.posten; index as i">
+                            <div class="width-fit align-left">{{formatProduct(posten.produkt)}} x {{posten.anzahl}} =
+                            </div>
+                            <div class="width-fit align-right">{{getSum(posten)}} €</div>
+                        </div>
+                        <p class="align-right margin">Netto gesamt: {{getTotal(task.posten)}} €</p>
+
                     </div>
-                    <p class="align-right margin">Netto gesamt: {{getTotal(task.posten)}} €</p>
-
                 </div>
-            </div>
 
-            <div class="flex-row">
-                <div class="flex-column">
-                    <span class="subtitle">Anmerkungen</span>
-                    <p>{{task.anmerkungen}}</p>
-                    <p>Deadline: {{formatDate(task.deadline) | date: 'dd.MM.yyyy'}}</p>
-                    <div class="progressbar-bg">
-                        <div class="progressbar-inner" [style.width]="calculateProgress(task.status) + '%'"></div>
+                <div class="flex-row">
+                    <div class="flex-column">
+                        <span class="subtitle">Anmerkungen</span>
+                        <p>{{task.anmerkungen}}</p>
+                        <p>Deadline: {{formatDate(task.deadline) | date: 'dd.MM.yyyy'}}</p>
+                        <div class="progressbar-bg">
+                            <div class="progressbar-inner" [style.width]="calculateProgress(task.status) + '%'"></div>
+                        </div>
+                        <div>
+                            <p>{{makeNumber(task.status)}}/9</p>
+                        </div>
+                        <span>Erstellt: {{formatDate(task.erstellt) | date: 'medium'}}</span>
+                        <p>Geändert: {{formatDate(task.geaendert) | date: 'medium'}}</p>
                     </div>
-                    <div><p>{{makeNumber(task.status)}}/9</p></div>
-                    <span>Erstellt: {{formatDate(task.erstellt) | date: 'medium'}}</span>
-                    <p>Geändert: {{formatDate(task.geaendert) | date: 'medium'}}</p>
                 </div>
-            </div>
 
-            <div class="flex-row">
-                <div class="flex-column">
-                    <button mat-raised-button color="primary"
-                        (click)="openDialog(task)"><mat-icon>edit</mat-icon>Bearbeiten</button>
+                <div class="flex-row">
+                    <div class="flex-column">
+                        <button mat-raised-button color="primary"
+                            (click)="openDialog(task)"><mat-icon>edit</mat-icon>Bearbeiten</button>
+                    </div>
                 </div>
-            </div>
 
-            <div class="flex-row margin-top">
-                <div class="flex-column">
-                    <button mat-raised-button color="primary"
-                        (click)="createPdf(task)"><mat-icon>picture_as_pdf</mat-icon>Rechnung erstellen</button>
-                </div>
+
+            </mat-card>
+        </div>
+
+        <div class="flex-column-simple" *ngFor="let task of fs.tasks | async">
+            <div class="flex-column margin-left" *ngIf="task.fid == taskId">
+
+                <app-rechnung-erstellen [task]="task"></app-rechnung-erstellen>
+
             </div>
-        </mat-card>
+        </div>
     </div>
-
 
 </section>

@@ -55,6 +55,8 @@ import { LieferAdresseComponent } from './components/sub/liefer-adresse/liefer-a
 import { RechnungsAdresseComponent } from './components/sub/rechnungs-adresse/rechnungs-adresse.component';
 import { EditAddressComponent } from './components/dialogs/edit-address/edit-address.component';
 import { TodoPipe } from './shared/pipes/todo.pipe';
+import { BtnSidenavDirective } from './shared/directives/btn-sidenav.directive';
+import { RechnungErstellenComponent } from './components/sub/rechnung-erstellen/rechnung-erstellen.component';
 console.log('%cThis is the development environment.', 'color: orange; font-size: 18px; font-weight: bold;');
 
 
@@ -81,10 +83,12 @@ console.log('%cThis is the development environment.', 'color: orange; font-size:
     StatusRedDirective,
     StatusOrangeDirective,
     StatusGreenDirective,
+    BtnSidenavDirective,
     LieferAdresseComponent,
     RechnungsAdresseComponent,
     EditAddressComponent,
     TodoPipe,
+    RechnungErstellenComponent,
   ],
   imports: [
     BrowserModule,
