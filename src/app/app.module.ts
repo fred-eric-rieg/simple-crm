@@ -22,6 +22,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { MainpageComponent } from './components/mainpage/mainpage.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
@@ -119,6 +120,7 @@ console.log('%cThis is the development environment.', 'color: orange; font-size:
     MatMenuModule,
     FormsModule,
     ReactiveFormsModule,
+    MatSlideToggleModule,
 
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),

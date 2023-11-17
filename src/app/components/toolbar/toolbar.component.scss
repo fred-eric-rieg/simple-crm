@@ -23,7 +23,12 @@ h1.example-app-name {
 .flex-row {
     display: flex;
     flex-direction: row;
+    align-items: center;
     gap: 1rem;
+}
+
+.logo {
+    font-size: 1.5rem;
 }
 
 .margin-left {

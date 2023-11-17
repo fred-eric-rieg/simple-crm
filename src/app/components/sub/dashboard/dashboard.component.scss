@@ -11,14 +11,17 @@ h2 {
     font-size: 1.5rem;
 }
 
-h3 {
-    width: 200px;
+.width-250 {
+    font-weight: bold;
+    text-decoration: underline  ;
+    width: 250px;
+    text-align: center;
 }
 
 .scroll {
     overflow-x: scroll;
     overflow-y: hidden;
-    height: 60vh;
+    height: 75vh;
 }
 
 .flex-column {
@@ -39,18 +42,26 @@ h3 {
     flex-direction: column;
 }
 
-.margin-top {
-    margin-top: 1rem;
-}
-
-.hover {
+.hover-dark {
     transition: all 125ms ease-in-out;
     cursor: pointer;
-    width: 200px;
-    max-width: 200px;
+    width: 250px;
+    max-width: 250px;
 }
 
-.hover:hover {
+.hover-light {
+    transition: all 125ms ease-in-out;
+    cursor: pointer;
+    width: 250px;
+    max-width: 250px;
+}
+
+.hover-light:hover {
+    transition: all 125ms ease-in-out;
+    background-color: #ccc;
+}
+
+.hover-dark:hover {
     transition: all 125ms ease-in-out;
     background-color: #303030;
 }
@@ -74,7 +85,7 @@ h3 {
     box-sizing: border-box;
     flex-direction: column;
     gap: 1rem;
-    height: 50vh;
+    height: 70vh;
     padding: 0.25rem;
     overflow-y: scroll;
     ::-webkit-scrollbar {

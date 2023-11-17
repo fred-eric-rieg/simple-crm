@@ -4,7 +4,7 @@
             [routerLink]="['/auftraege']"><mat-icon>keyboard_backspace</mat-icon>Alle Aufträge</button>
     </div>
 
-    <div class="flex-row-simple">
+    <div class="wrapper">
 
         <div *ngFor="let task of fs.tasks | async">
 
@@ -77,7 +77,7 @@
         </div>
 
         <div class="flex-column-simple" *ngFor="let task of fs.tasks | async">
-            <div class="flex-column margin-left" *ngIf="task.fid == taskId">
+            <div class="button-wrapper" *ngIf="task.fid == taskId">
 
                 <app-rechnung-erstellen [task]="task" class="margin-bottom"></app-rechnung-erstellen>
 

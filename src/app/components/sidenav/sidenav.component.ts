@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { SidenavService } from 'src/app/shared/services/sidenav.service';
+import { ThemeService } from 'src/app/shared/services/theme.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -13,9 +14,11 @@ export class SidenavComponent implements OnDestroy, OnInit {
 
   @ViewChild('snav') snav: any;
 
+
   constructor(
     public snavservice: SidenavService,
     private router: Router,
+    private themeService: ThemeService
   ) { }
 
   ngOnInit(): void {
@@ -40,6 +43,13 @@ export class SidenavComponent implements OnDestroy, OnInit {
   toggle() {
     this.snav.toggle();
     this.snavservice.toggled = !this.snavservice.toggled;
+  }
+
+
+  changeTheme() {
+    this.themeService.darkTheme = !this.themeService.darkTheme;
+    let theme = this.themeService.darkTheme ? 'pink-bluegrey' : 'indigo-pink';
+    this.themeService.setTheme(theme);
   }
 
 }

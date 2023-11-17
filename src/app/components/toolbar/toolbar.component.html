@@ -18,15 +18,19 @@
             <button mat-button (click)="open('/produkte')">
                 <mat-icon>sell</mat-icon> Produkte
             </button>
+            <button mat-icon-button color="secondary" aria-label="dark mode icon" (click)="changeTheme()" matTooltip="Change Theme">
+                <mat-icon *ngIf="themeService.darkTheme">light_mode</mat-icon>
+                <mat-icon *ngIf="!themeService.darkTheme">dark_mode</mat-icon>
+            </button>
         </div>
 
-        
+
         <div class="flex-row">
-            <h1>Treffpunkt</h1>
+            <span class="logo">Treffpunkt</span>
         </div>
-        
-    
-        
+
+
+
     </div>
-    
+
 </mat-toolbar>

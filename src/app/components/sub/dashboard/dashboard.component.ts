@@ -2,6 +2,7 @@ import { Component, Renderer2 } from '@angular/core';
 import { Timestamp } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { FirebaseService } from 'src/app/shared/services/firebase.service';
+import { ThemeService } from 'src/app/shared/services/theme.service';
 
 interface Task {
   title: string;
@@ -53,7 +54,8 @@ export class DashboardComponent {
   constructor(
     public fs: FirebaseService,
     private router: Router,
-    private renderer: Renderer2) {
+    private renderer: Renderer2,
+    public ts: ThemeService) {
     setInterval(() => {
       this.today = new Date();
     }, 60000);

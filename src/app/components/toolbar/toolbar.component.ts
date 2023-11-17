@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { SidenavService } from 'src/app/shared/services/sidenav.service';
+import { ThemeService } from 'src/app/shared/services/theme.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -11,7 +12,9 @@ export class ToolbarComponent {
 
   constructor(
     public snavservice: SidenavService,
-    private router: Router) { }
+    private router: Router,
+    public themeService: ThemeService
+    ) { }
 
 
   toggleSidenav() {
@@ -23,4 +26,10 @@ export class ToolbarComponent {
     this.router.navigate([url]);
   }
 
+
+  changeTheme() {
+    this.themeService.darkTheme = !this.themeService.darkTheme;
+    let theme = this.themeService.darkTheme ? 'pink-bluegrey' : 'indigo-pink';
+    this.themeService.setTheme(theme);
+  }
 }
