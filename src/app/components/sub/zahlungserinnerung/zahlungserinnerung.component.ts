@@ -109,7 +109,8 @@ export class ZahlungserinnerungComponent {
     doc.setFontSize(16);
     // place infos right
     doc.text("Datum: " + (new Date()).toLocaleString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' }), 120, 60);
-    doc.text("Ust.IdNr: 12123123123", 120, 70);
+    doc.text("Rechnungsnummer: #2023-" + String(task.id), 120, 70);
+    doc.text("Ust.IdNr: 12123123123", 120, 80);
 
     doc.text("Zahlungserinnungerung Nr.: #2023-" + String(task.id) + "-1", 10, 90);
 
