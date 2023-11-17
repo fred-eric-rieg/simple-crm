@@ -4,16 +4,16 @@
         <p class="bold">CRM Hauptmenü</p>
         
         <div class="column">
-            <button (click)="showFiller = !showFiller" mat-button (click)="open('/dashboard')">
+            <button (click)="showFiller = !showFiller" mat-button (click)="open('/dashboard')" appBtnSidenav>
                 <mat-icon>home</mat-icon> Dashboard
             </button>
-            <button (click)="showFiller = !showFiller" mat-button (click)="open('/kunden')">
+            <button (click)="showFiller = !showFiller" mat-button (click)="open('/kunden')" appBtnSidenav>
                 <mat-icon>contact_mail</mat-icon> Kunden
             </button>
-            <button (click)="showFiller = !showFiller" mat-button (click)="open('/auftraege')">
+            <button (click)="showFiller = !showFiller" mat-button (click)="open('/auftraege')" appBtnSidenav>
                 <mat-icon>description</mat-icon> Aufträge
             </button>
-            <button (click)="showFiller = !showFiller" mat-button (click)="open('/produkte')">
+            <button (click)="showFiller = !showFiller" mat-button (click)="open('/produkte')" appBtnSidenav>
                 <mat-icon>sell</mat-icon> Produkte
             </button>
         </div>
