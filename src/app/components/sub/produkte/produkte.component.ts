@@ -112,6 +112,6 @@ export class ProdukteComponent implements AfterViewInit {
 
 
   selectTask(fid: string) {
-    this.router.navigate(['produkte/', fid]);
+    this.router.navigate(['main/produkte/', fid]);
   }
 }

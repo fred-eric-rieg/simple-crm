@@ -54,4 +54,9 @@ export class ProdukteDetailsComponent {
     });
   }
 
+
+  openPage() {
+    this.router.navigate(['main/produkte']);
+  }
+
 }

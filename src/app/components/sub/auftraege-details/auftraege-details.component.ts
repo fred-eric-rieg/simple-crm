@@ -192,4 +192,9 @@ export class AuftraegeDetailsComponent {
     let num = Number(status);
     return (num / 9) * 100;
   }
+
+
+  openPage() {
+    this.router.navigate(['main/auftraege']);
+  }
 }

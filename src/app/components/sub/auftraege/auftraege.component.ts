@@ -149,6 +149,6 @@ export class AuftraegeComponent implements AfterViewInit {
 
 
   selectTask(fid: string) {
-    this.router.navigate(['auftraege/', fid]);
+    this.router.navigate(['main/auftraege/', fid]);
   }
 }

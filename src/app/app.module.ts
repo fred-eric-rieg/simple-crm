@@ -61,6 +61,7 @@ import { RechnungErstellenComponent } from './components/sub/rechnung-erstellen/
 import { ZahlungserinnerungComponent } from './components/sub/zahlungserinnerung/zahlungserinnerung.component';
 import { Mahnung1Component } from './components/sub/mahnung1/mahnung1.component';
 import { Mahnung2Component } from './components/sub/mahnung2/mahnung2.component';
+import { LoginComponent } from './components/login/login.component';
 console.log('%cThis is the development environment.', 'color: orange; font-size: 18px; font-weight: bold;');
 
 
@@ -96,6 +97,7 @@ console.log('%cThis is the development environment.', 'color: orange; font-size:
     ZahlungserinnerungComponent,
     Mahnung1Component,
     Mahnung2Component,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

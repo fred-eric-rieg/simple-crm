@@ -1,7 +1,7 @@
 <section class="main-box">
     <div class="flex-row">
         <h1>Detailansicht Kunde</h1> <button mat-raised-button
-            [routerLink]="['/kunden']"><mat-icon>keyboard_backspace</mat-icon>Alle Kunden</button>
+            (click)="openPage()"><mat-icon>keyboard_backspace</mat-icon>Alle Kunden</button>
     </div>
 
     <div *ngFor="let kunde of fs.customers | async" [class.flex-row]="windowWidth > 600" [class.flex-column]="windowWidth <= 600">

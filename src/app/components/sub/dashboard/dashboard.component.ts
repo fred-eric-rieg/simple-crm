@@ -101,7 +101,7 @@ export class DashboardComponent {
 
 
   navigateToTask(fid: string) {
-    this.router.navigate(['auftraege', fid]);
+    this.router.navigate(['main/auftraege', fid]);
   }
 
 

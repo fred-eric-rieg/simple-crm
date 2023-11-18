@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoginService } from 'src/app/shared/services/login.service';
 import { SidenavService } from 'src/app/shared/services/sidenav.service';
 import { ThemeService } from 'src/app/shared/services/theme.service';
 
@@ -13,7 +14,8 @@ export class ToolbarComponent {
   constructor(
     public snavservice: SidenavService,
     private router: Router,
-    public themeService: ThemeService
+    public themeService: ThemeService,
+    private loginService: LoginService
     ) { }
 
 
@@ -23,7 +25,7 @@ export class ToolbarComponent {
   }
 
   open(url: string) {
-    this.router.navigate([url]);
+    this.router.navigate(["main/"+url]);
   }
 
 
@@ -31,5 +33,16 @@ export class ToolbarComponent {
     this.themeService.darkTheme = !this.themeService.darkTheme;
     let theme = this.themeService.darkTheme ? 'pink-bluegrey' : 'indigo-pink';
     this.themeService.setTheme(theme);
+  }
+
+
+  async logout() {
+    await this.loginService.logout();
+    this.loginService.isAuth().then((user) => {
+      user === null ? this.router.navigateByUrl("login") : this.router.navigateByUrl("main/dashboard");
+    }).catch((err) => {
+      console.log(err);
+      this.router.navigateByUrl("login");
+    });
   }
 }

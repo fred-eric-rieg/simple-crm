@@ -63,4 +63,9 @@ export class KundenDetailsComponent {
     });
   }
 
+
+  openPage() {
+    this.router.navigate(['main/kunden']);
+  }
+
 }

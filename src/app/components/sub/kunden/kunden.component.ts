@@ -96,6 +96,6 @@ export class KundenComponent implements AfterViewInit {
 
 
   selectCustomer(fid: string) {
-    this.router.navigate(['kunden/', fid]);
+    this.router.navigate(['main/kunden/', fid]);
   }
 }
