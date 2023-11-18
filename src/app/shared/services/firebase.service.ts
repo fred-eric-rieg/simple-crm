@@ -4,6 +4,10 @@ import { Firestore, onSnapshot, getFirestore, collection, query, Timestamp, addD
 import { BehaviorSubject } from 'rxjs';
 
 let unsub!: Unsubscribe;
+let unsub1!: Unsubscribe;
+let unsub2!: Unsubscribe;
+let unsub3!: Unsubscribe;
+let unsub4!: Unsubscribe;
 
 interface Customer {
   id: number;
@@ -81,6 +85,10 @@ export class FirebaseService implements OnDestroy {
 
   ngOnDestroy(): void {
     unsub();
+    unsub1();
+    unsub2();
+    unsub3();
+    unsub4();
   }
 
   /**
@@ -231,7 +239,7 @@ export class FirebaseService implements OnDestroy {
 
     let task: Task[] = [];
 
-    unsub = onSnapshot(q, (querySnapshot) => {
+    unsub1 = onSnapshot(q, (querySnapshot) => {
 
       task.length = 0; // Clear array to prevent duplicates.
 
@@ -292,7 +300,7 @@ export class FirebaseService implements OnDestroy {
 
     let product: Produkt[] = [];
 
-    unsub = onSnapshot(q, (querySnapshot) => {
+    unsub2 = onSnapshot(q, (querySnapshot) => {
 
       product.length = 0; // Clear array to prevent duplicates.
 
@@ -353,7 +361,7 @@ export class FirebaseService implements OnDestroy {
 
     let deliveryAddress: Address[] = [];
 
-    unsub = onSnapshot(q, (querySnapshot) => {
+    unsub3 = onSnapshot(q, (querySnapshot) => {
 
       deliveryAddress.length = 0; // Clear array to prevent duplicates.
 
@@ -363,7 +371,7 @@ export class FirebaseService implements OnDestroy {
       this.deliveryAddress.next(deliveryAddress);
     });
 
-    return unsub;
+    return unsub3;
   }
 
   /**
@@ -376,7 +384,7 @@ export class FirebaseService implements OnDestroy {
 
     let invoiceAddress: Address[] = [];
 
-    unsub = onSnapshot(q, (querySnapshot) => {
+    unsub4 = onSnapshot(q, (querySnapshot) => {
 
       invoiceAddress.length = 0; // Clear array to prevent duplicates.
 
@@ -386,7 +394,7 @@ export class FirebaseService implements OnDestroy {
       this.invoiceAddress.next(invoiceAddress);
     });
 
-    return unsub;
+    return unsub4;
   }
 
 }
