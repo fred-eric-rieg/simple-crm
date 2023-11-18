@@ -3,7 +3,7 @@
 
     <div>
         <mat-card>
-            <mat-card-content class="flex-row scroll">
+            <mat-card-content class="flex-row scroll" [class.bg-dark]="ts.darkTheme" [class.bg-light]="!ts.darkTheme">
 
                 <div *ngFor="let option of statusOptions; index as i" class="flex-column">
                     <span class="width-250">{{option}}</span>
